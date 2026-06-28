@@ -1,1493 +1,1035 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Janna &amp; Shamil — Wedding Invitation</title>
-<meta name="description" content="With the blessings of Almighty Allah — Janna &amp; Shamil invite you to their Nikah on 08 August 2026 at Hiltop Auditorium, Purakkatiri, Kozhikode."/>
-
-<!-- Social share / WhatsApp link preview -->
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Janna & Shamil | Wedding Invitation"/>
-<meta property="og:description" content="08 August 2026 · Kozhikode, Kerala — You are lovingly invited."/>
-<meta property="og:image" content="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_faces/digiwed-invitations/shamil-janna-gs/og-thumb.jpg"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:url" content="https://digiwed161-sys.github.io/ShamilwedsJanna/"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Janna & Shamil | Wedding Invitation"/>
-<meta name="twitter:image" content="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_faces/digiwed-invitations/shamil-janna-gs/og-thumb.jpg"/>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
-
-<!-- Firebase Compat SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<!-- PDF generation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Janna & Shamil — Wedding Invitation</title>
+<meta property="og:title" content="Janna & Shamil | Wedding Invitation">
+<meta property="og:description" content="08 August 2026 · Hiltop Auditorium, Kozhikode — You are lovingly invited.">
+<meta property="og:image" content="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_faces/digiwed-invitations/shamil-janna/hero-v1.jpg">
+<meta property="og:url" content="https://murshid161-sketch.github.io/Shamil_weds_janna/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #faf6f0;
-    --warm-white: #fff9f2;
-    --gold: #b8965a;
-    --gold-light: #d4aa6a;
-    --gold-dark: #8a6e3a;
-    --dark: #1a1510;
-    --dark-brown: #2d2318;
-    --text-dark: #2a1f0e;
-    --text-mid: #5a4a35;
-    --text-light: #8a7a65;
-    --green: #3d5a3e;
-    --rose: #c9856a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Cormorant Garamond', serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
-
-  /* ══════════════════════════════
-     LANDING PAGE
-  ══════════════════════════════ */
-  #landing-page {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 28px;
-    overflow: hidden;
-  }
-
-  #landing-page.hidden {
-    pointer-events: none;
-    animation: landingFadeOut 0.8s ease forwards;
-  }
-
-  @keyframes landingFadeOut {
-    to { opacity: 0; transform: scale(1.04); }
-  }
-
-  .landing-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 80%, rgba(184,150,90,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(184,150,90,0.08) 0%, transparent 60%);
-  }
-
-  .landing-ornament-top,
-  .landing-ornament-bottom {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
-    opacity: 0.18;
-  }
-  .landing-ornament-top { top: 0; }
-  .landing-ornament-bottom { bottom: 0; transform: translateX(-50%) rotate(180deg); }
-
-  .landing-content {
-    position: relative;
-    z-index: 2;
-    animation: landingIn 1.2s ease both;
-  }
-
-  @keyframes landingIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  .landing-cross {
-    font-size: 28px;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 14px;
-    opacity: 0.7;
-  }
-
-  .landing-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 5px;
-    color: var(--gold);
-    margin-bottom: 28px;
-    opacity: 0.8;
-  }
-
-  .landing-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(64px, 18vw, 96px);
-    color: #fff;
-    line-height: 1;
-    text-shadow: 0 4px 40px rgba(0,0,0,0.5);
-  }
-
-  .landing-amp {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(36px, 9vw, 52px);
-    color: var(--gold-light);
-    display: block;
-    margin: 4px 0;
-  }
-
-  .landing-date {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 6px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 22px;
-    margin-bottom: 10px;
-  }
-
-  .landing-venue {
-    font-size: 15px;
-    font-style: italic;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 36px;
-  }
-
-  /* Guest greeting */
-  .landing-guest-wrap {
-    margin-bottom: 32px;
-  }
-
-  .landing-guest-line {
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 6px;
-  }
-
-  .landing-guest-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(34px, 9vw, 48px);
-    color: var(--gold-light);
-  }
-
-  .landing-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 32px;
-    color: rgba(184,150,90,0.5);
-    font-size: 12px;
-  }
-
-  .landing-divider::before,
-  .landing-divider::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 1px;
-    background: rgba(184,150,90,0.35);
-  }
-
-  .landing-open-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    border: 1px solid rgba(184,150,90,0.6);
-    color: var(--gold-light);
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 5px;
-    padding: 18px 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.35s;
-    text-transform: uppercase;
-  }
-
-  .landing-open-btn:hover {
-    background: var(--gold);
-    color: var(--dark);
-    border-color: var(--gold);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(184,150,90,0.3);
-  }
-
-  .landing-open-btn .btn-icon {
-    font-size: 16px;
-    transition: transform 0.35s;
-  }
-
-  .landing-open-btn:hover .btn-icon {
-    transform: translateY(2px);
-  }
-
-  /* ══════════════════════════════
-     MAIN INVITATION (hidden until opened)
-  ══════════════════════════════ */
-  #main-invitation {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s ease 0.2s;
-  }
-
-  #main-invitation.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    background: var(--dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    overflow: hidden;
-  }
-
-  .hero-img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0.75;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(10,8,5,0.1) 0%, rgba(10,8,5,0.35) 50%, rgba(10,8,5,0.85) 100%);
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 0 24px 60px;
-    animation: fadeUp 1.4s ease both;
-  }
-
-  .hero-blessing {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold-light);
-    margin-bottom: 16px;
-    opacity: 0.9;
-  }
-
-  /* Guest greeting in hero */
-  .hero-guest-greeting {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 10px;
-    display: none;
-  }
-
-  .hero-guest-greeting.show { display: block; }
-
-  .hero-guest-gname {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(28px, 7vw, 38px);
-    color: var(--gold-light);
-    display: block;
-    margin-bottom: 16px;
-  }
-
-  .hero-cross {
-    font-size: 22px;
-    color: var(--gold);
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .hero-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(58px, 15vw, 80px);
-    color: #fff;
-    line-height: 1.05;
-    text-shadow: 0 2px 30px rgba(0,0,0,0.4);
-  }
-
-  .hero-amp {
-    font-family: 'Great Vibes', cursive;
-    font-size: 36px;
-    color: var(--gold-light);
-    display: block;
-    margin: 4px 0;
-  }
-
-  .hero-date {
-    font-family: 'Cinzel', serif;
-    font-size: 12px;
-    letter-spacing: 5px;
-    color: rgba(255,255,255,0.85);
-    margin-top: 20px;
-  }
-
-  /* ── INVITE SECTION ── */
-  .invite-section {
-    background: var(--warm-white);
-    text-align: center;
-    padding: 70px 28px 60px;
-    position: relative;
-  }
-
-  .section-label {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-
-  .section-title {
-    font-size: clamp(32px, 7vw, 44px);
-    font-weight: 400;
-    color: var(--text-dark);
-    line-height: 1.2;
-    margin-bottom: 28px;
-  }
-
-  .invite-text {
-    font-size: 18px;
-    font-style: italic;
-    color: var(--text-mid);
-    line-height: 1.8;
-    max-width: 340px;
-    margin: 0 auto 12px;
-  }
-
-  .invite-names {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin: 4px 0 12px;
-  }
-
-  .divider-stars {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 30px auto;
-    color: var(--gold);
-    font-size: 14px;
-  }
-
-  .divider-stars::before,
-  .divider-stars::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.4;
-  }
-
-  /* ── COUNTDOWN ── */
-  .countdown-wrap {
-    background: var(--warm-white);
-    padding: 0 28px 70px;
-    text-align: center;
-  }
-
-  .countdown-label {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    margin-bottom: 24px;
-  }
-
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    align-items: flex-start;
-  }
-
-  .cd-item {
-    text-align: center;
-    min-width: 64px;
-  }
-
-  .cd-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 300;
-    color: var(--text-dark);
-    line-height: 1;
-    display: block;
-  }
-
-  .cd-label {
-    font-family: 'Cinzel', serif;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--text-light);
-    margin-top: 6px;
-    display: block;
-  }
-
-  .cd-dot {
-    font-size: 32px;
-    color: var(--gold);
-    line-height: 1.4;
-    margin-top: 4px;
-  }
-
-  /* ── GALLERY ── */
-  .gallery-section {
-    background: var(--dark-brown);
-    padding: 70px 0 80px;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .gallery-section .section-label { color: var(--gold-light); }
-
-  .gallery-section .section-title {
-    color: #fff;
-    font-style: italic;
-    margin-bottom: 40px;
-    padding: 0 24px;
-  }
-
-  .carousel-wrap {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
-
-  .carousel-slide {
-    min-width: 100%;
-    padding: 0 30px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .carousel-slide-inner {
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-
-  .carousel-slide img {
-    width: 100%;
-    display: block;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-  }
-
-  .carousel-quote {
-    position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    padding: 50px 18px 18px;
-    background: linear-gradient(to top, rgba(10,8,5,0.85) 0%, rgba(10,8,5,0.4) 65%, transparent 100%);
-    text-align: center;
-  }
-
-  .carousel-quote p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-style: italic;
-    color: rgba(255,255,255,0.92);
-    line-height: 1.55;
-    margin-bottom: 10px;
-  }
-
-  .carousel-quote-line {
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--gold);
-    margin: 0 auto;
-    opacity: 0.7;
-  }
-
-  .carousel-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 30px;
-  }
-
-  .carousel-btn {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(184,150,90,0.5);
-    background: transparent;
-    color: var(--gold-light);
-    font-size: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s;
-  }
-
-  .carousel-btn:hover { background: var(--gold); color: var(--dark); }
-
-  .carousel-dots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(184,150,90,0.3);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .dot.active {
-    background: var(--gold-light);
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  /* ── CEREMONY CARD ── */
-  .ceremony-section {
-    background: var(--cream);
-    padding: 70px 24px;
-    text-align: center;
-  }
-
-  .event-card {
-    background: #fff;
-    border: 1px solid rgba(184,150,90,0.25);
-    border-radius: 16px;
-    padding: 36px 28px;
-    max-width: 360px;
-    margin: 24px auto 0;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
-  }
-
-  .event-card-label {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  .event-date-big {
-    font-size: 42px;
-    font-weight: 300;
-    color: var(--text-dark);
-    line-height: 1;
-  }
-
-  .event-day {
-    font-size: 18px;
-    font-style: italic;
-    color: var(--gold);
-    margin: 6px 0 20px;
-  }
-
-  .event-time {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--text-mid);
-    margin-bottom: 20px;
-  }
-
-  .event-venue-name {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text-dark);
-    margin-bottom: 6px;
-  }
-
-  .event-venue-addr {
-    font-size: 15px;
-    color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .map-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(184,150,90,0.5);
-    padding: 10px 28px;
-    border-radius: 4px;
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold-dark);
-    text-decoration: none;
-    transition: all 0.3s;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .map-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
-
-  /* Engagement card */
-  .eng-card {
-    background: var(--dark-brown);
-    border-radius: 16px;
-    padding: 30px 28px;
-    max-width: 360px;
-    margin: 16px auto 0;
-    color: #fff;
-    text-align: center;
-  }
-
-  .eng-card .event-card-label { color: var(--gold-light); }
-  .eng-card .event-date-big { color: #fff; }
-  .eng-card .event-day { color: var(--gold-light); }
-  .eng-card .event-venue-name { color: #fff; }
-  .eng-card .event-venue-addr { color: rgba(255,255,255,0.65); }
-  .eng-card .map-btn {
-    border-color: rgba(184,150,90,0.5);
-    color: var(--gold-light);
-  }
-  .eng-card .map-btn:hover { background: var(--gold); color: var(--dark); }
-
-  /* DigiWed -- Islamic Nikah additions (Janna & Shamil) */
-  .event-hijri{ font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--gold); margin:4px 0 16px; }
-  .contact-line{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:11px 2px; border-bottom:1px solid rgba(184,150,90,.18); text-align:left; }
-  .contact-line:last-child{ border-bottom:none; }
-  .contact-who{ font-size:16px; color:rgba(255,255,255,.82); }
-  .contact-num{ font-family:'Cinzel',serif; font-size:10px; letter-spacing:1px; color:var(--gold-light); text-decoration:none; white-space:nowrap; }
-  .contact-num:hover{ color:#fff; }
-  .scripture-arabic{ font-size:27px; line-height:1.95; color:var(--gold-dark); max-width:340px; margin:0 auto 18px; direction:rtl; }
-
-  /* ── SCRIPTURE ── */
-  .scripture-section {
-    background: var(--warm-white);
-    padding: 60px 32px;
-    text-align: center;
-  }
-
-  .scripture-mark {
-    font-size: 40px;
-    color: var(--gold);
-    margin-bottom: 12px;
-    opacity: 0.6;
-  }
-
-  .scripture-text {
-    font-size: 22px;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--text-dark);
-    line-height: 1.7;
-    max-width: 320px;
-    margin: 0 auto 16px;
-  }
-
-  .scripture-ref {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-  }
-
-  /* ── FAMILIES ── */
-  .families-section {
-    background: var(--cream);
-    padding: 70px 24px;
-    text-align: center;
-  }
-
-  .family-card {
-    background: #fff;
-    border: 1px solid rgba(184,150,90,0.2);
-    border-radius: 16px;
-    padding: 32px 24px;
-    max-width: 360px;
-    margin: 20px auto 0;
-    text-align: left;
-  }
-
-  .family-card-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-align: center;
-    margin-bottom: 14px;
-  }
-
-  .family-person-name {
-    font-size: 26px;
-    font-weight: 400;
-    text-align: center;
-    color: var(--text-dark);
-    margin-bottom: 20px;
-  }
-
-  .family-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-    align-items: flex-start;
-  }
-
-  .family-diamond {
-    color: var(--gold);
-    font-size: 12px;
-    margin-top: 4px;
-    flex-shrink: 0;
-  }
-
-  .family-role {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--gold-dark);
-    margin-bottom: 2px;
-  }
-
-  .family-name {
-    font-size: 18px;
-    color: var(--text-dark);
-  }
-
-  /* ── SHARING ── */
-  .sharing-section {
-    background: var(--warm-white);
-    padding: 50px 28px;
-    text-align: center;
-  }
-
-  .sharing-names {
-    font-size: 18px;
-    color: var(--text-mid);
-    font-style: italic;
-    margin-top: 12px;
-    line-height: 1.8;
-  }
-
-  /* ── WISHES ── */
-  .wishes-section {
-    background: var(--dark);
-    padding: 70px 24px 80px;
-    text-align: center;
-  }
-
-  .wishes-section .section-label { color: var(--gold-light); }
-
-  .wishes-section .section-title {
-    font-style: italic;
-    color: #fff;
-    margin-bottom: 36px;
-  }
-
-  .wish-input {
-    width: 100%;
-    max-width: 360px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(184,150,90,0.3);
-    border-radius: 8px;
-    padding: 14px 16px;
-    color: #fff;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    display: block;
-    margin: 0 auto 12px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .wish-input::placeholder { color: rgba(255,255,255,0.35); }
-  .wish-input:focus { border-color: var(--gold); }
-
-  textarea.wish-input {
-    resize: none;
-    min-height: 100px;
-  }
-
-  .send-btn {
-    width: 100%;
-    max-width: 360px;
-    background: transparent;
-    border: 1px solid rgba(184,150,90,0.6);
-    color: var(--gold-light);
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    padding: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto;
-  }
-
-  .send-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  .wishes-grid {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .wish-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(184,150,90,0.2);
-    border-radius: 12px;
-    padding: 22px 20px;
-    text-align: left;
-    animation: wishIn 0.5s ease both;
-  }
-
-  @keyframes wishIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  .wish-card-name {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-
-  .wish-card-msg {
-    font-size: 17px;
-    font-style: italic;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.65;
-  }
-
-  .loadmore-wrap {
-    margin-top: 24px;
-    text-align: center;
-  }
-
-  .loadmore-btn {
-    background: transparent;
-    border: 1px solid rgba(184,150,90,0.4);
-    color: var(--gold);
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 3px;
-    padding: 12px 28px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .loadmore-btn:hover { background: rgba(184,150,90,0.1); }
-
-  .wish-status {
-    font-size: 14px;
-    font-style: italic;
-    color: rgba(255,255,255,0.4);
-    margin-top: 12px;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--dark-brown);
-    padding: 40px 24px;
-    text-align: center;
-  }
-
-  .footer-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: 36px;
-    color: var(--gold-light);
-    margin-bottom: 8px;
-  }
-
-  .footer-date {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 20px;
-  }
-
-  .footer-divider {
-    width: 60px;
-    height: 1px;
-    background: rgba(184,150,90,0.4);
-    margin: 20px auto;
-  }
-
-  .footer-credit {
-    font-size: 12px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 1px;
-  }
-
-  /* ── FLOATING BUTTONS ── */
-  .float-wa {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    background: #25D366;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    text-decoration: none;
-    transition: transform 0.3s;
-  }
-  .float-wa:hover { transform: scale(1.1); }
-  .float-wa svg { width: 26px; height: 26px; fill: #fff; }
-
-  .float-mute {
-    position: fixed;
-    bottom: 28px;
-    right: 20px;
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    background: rgba(30,22,12,0.85);
-    border: 1.5px solid rgba(184,150,90,0.5);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999;
-    cursor: pointer;
-    color: var(--gold);
-    font-size: 20px;
-    transition: all 0.3s;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ═══════════════════════════════════════
-     DIGIWED STANDARD ADD-ONS
-     (blessings counter, hearts, wish replies, ADMIN mode,
-      Cloudinary photo/BGM upload, PDF capture)
-  ═══════════════════════════════════════ */
-  .wish-count-wrap{ font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px;
-    color:var(--gold-light); margin:-22px auto 26px; text-transform:uppercase; }
-  .wish-count-wrap b{ color:#fff; font-weight:600; }
-
-  .wish-card{ position:relative; }
-
-  .wish-skel{ height:84px; border-radius:12px; margin-bottom:16px;
-    background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
-    background-size:200% 100%; animation:skel 1.4s ease infinite; }
-  @keyframes skel{ 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-  .wish-empty{ font-size:17px; font-style:italic; color:rgba(255,255,255,.55); padding:22px 0; }
-
-  .wish-heart{ position:absolute; top:16px; right:16px; background:transparent; border:none;
-    cursor:pointer; font-family:'Cinzel',serif; font-size:13px; color:rgba(255,255,255,.30);
-    letter-spacing:1px; padding:4px; transition:color .3s, transform .2s; }
-  .wish-heart.liked{ color:var(--gold-light); transform:scale(1.12); }
-
-  .wish-reply{ margin-top:14px; padding:10px 14px; border-left:2px solid var(--gold);
-    background:rgba(184,150,90,.08); border-radius:0 8px 8px 0; text-align:left; }
-  .wish-reply-who{ font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px;
-    text-transform:uppercase; color:var(--gold-light); margin-bottom:5px; }
-  .wish-reply-msg{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px;
-    color:rgba(255,255,255,.82); line-height:1.5; }
-  .reply-new{ animation:replyGlow 2.4s ease 3; }
-  @keyframes replyGlow{ 0%,100%{box-shadow:none} 50%{box-shadow:0 0 0 2px var(--gold)} }
-
-  .wish-admin-btn{ margin-top:10px; background:transparent; border:1px solid rgba(184,150,90,.45);
-    color:var(--gold-light); font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px;
-    text-transform:uppercase; padding:7px 14px; border-radius:5px; cursor:pointer; margin-right:8px; }
-  .reply-editor{ margin-top:10px; }
-  .reply-editor textarea{ width:100%; background:rgba(255,255,255,.07);
-    border:1px solid rgba(184,150,90,.3); border-radius:8px; padding:10px 12px; color:#fff;
-    font-family:'Cormorant Garamond',serif; font-size:16px; height:70px; resize:none; outline:none; margin-bottom:8px; }
-
-  #adminBar{ position:fixed; top:0; left:0; right:0; z-index:2500; display:none;
-    background:rgba(26,21,16,.97); color:var(--gold-light); font-family:'Cinzel',serif;
-    font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:10px 14px; text-align:center; }
-  #adminBar button{ background:transparent; border:1px solid var(--gold-light); color:var(--gold-light);
-    font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; padding:4px 10px; border-radius:4px;
-    margin-left:10px; cursor:pointer; }
-  #pinModal{ position:fixed; inset:0; z-index:2600; display:none; background:rgba(0,0,0,.75);
-    align-items:center; justify-content:center; }
-  .pin-box{ background:var(--dark); border:1px solid rgba(184,150,90,.35); border-radius:14px;
-    padding:28px 24px; width:280px; max-width:86vw; text-align:center; }
-  .pin-title{ font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--gold-light); margin-bottom:16px; }
-  .pin-box input{ width:100%; background:rgba(255,255,255,.07); border:1px solid rgba(184,150,90,.3);
-    border-radius:8px; padding:12px; color:#fff; text-align:center; letter-spacing:4px;
-    font-family:'Cinzel',serif; font-size:14px; outline:none; margin-bottom:14px; }
-  .admin-link{ margin-top:4px; background:transparent; border:1px solid rgba(184,150,90,.25);
-    color:rgba(184,150,90,.55); font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px;
-    text-transform:uppercase; padding:8px 22px; border-radius:5px; cursor:pointer; }
-
-  .img-slot-add{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center;
-    justify-content:center; gap:6px; cursor:pointer; z-index:12; background:rgba(0,0,0,.30); }
-  body.admin-on .img-slot-add{ display:flex; }
-  .img-slot-add .plus{ width:44px; height:44px; border-radius:50%; background:rgba(184,150,90,.92);
-    display:flex; align-items:center; justify-content:center; font-size:24px; color:#1a1510; font-weight:300; }
-  .img-slot-add span{ font-family:'Cinzel',serif; font-size:8px; letter-spacing:.22em; color:rgba(255,255,255,.9); }
-  .img-delete-btn{ position:absolute; top:8px; right:8px; width:28px; height:28px; border-radius:50%;
-    background:rgba(180,30,30,.85); border:1.5px solid rgba(255,255,255,.4); display:none;
-    align-items:center; justify-content:center; cursor:pointer; z-index:20; color:#fff; font-size:14px;
-    line-height:1; box-shadow:0 2px 8px rgba(0,0,0,.4); }
-
-  .gallery-ph{ width:100%; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:10px; background:linear-gradient(135deg,#2d2318,#3c2f1d); color:rgba(212,170,106,.45); }
-  .gallery-ph svg{ width:46px; height:46px; }
-  .gallery-ph span{ font-family:'Cinzel',serif; font-size:9px; letter-spacing:.2em; }
-
-  #bgmUploadBtn{ position:fixed; bottom:150px; right:20px; z-index:998; width:48px; height:48px;
-    border-radius:50%; background:linear-gradient(135deg,#b8965a,#8a6e3a); border:none; display:none;
-    align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 16px rgba(184,150,90,.4); }
-  body.admin-on #bgmUploadBtn{ display:flex; }
-  #bgmUploadBtn svg{ width:20px; height:20px; color:#1a1510; }
-  #bgmProgOverlay{ position:fixed; bottom:206px; right:14px; z-index:999; background:rgba(26,21,16,.94);
-    border:1px solid rgba(184,150,90,.3); border-radius:10px; padding:10px 14px; display:none;
-    min-width:150px; backdrop-filter:blur(8px); }
-  #bgmProgOverlay.show{ display:block; }
-  #bgmProgLabel{ font-family:'Cinzel',serif; font-size:8px; letter-spacing:.2em; color:var(--gold-light); margin-bottom:8px; }
-  #bgmProgBar{ width:100%; height:3px; background:rgba(255,255,255,.1); border-radius:2px; }
-  #bgmProgFill{ height:100%; background:linear-gradient(90deg,#b8965a,#e8c990); border-radius:2px; width:0%; transition:width .25s; }
-
-  /* PDF capture / print hygiene */
-  .pdf-capturing .no-pdf, .pdf-capturing #pdfDownloadBtn{ display:none !important; }
-  .pdf-capturing #main-invitation{ opacity:1 !important; }
-  .pdf-capturing .reveal{ opacity:1 !important; transform:none !important; }
-  @media print{
-    .no-pdf, #pdfDownloadBtn{ display:none !important; }
-    #main-invitation{ opacity:1 !important; }
-    .reveal{ opacity:1 !important; transform:none !important; }
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Dancing Script', cursive;
+  background: #faf7f2;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+:root {
+  --dark:    #3a0000;
+  --dark2:   #2a0000;
+  --dark3:   #450000;
+  --cream:   #faf7f2;
+  --cream2:  #f0ebe0;
+  --gold:    #c9a55a;
+  --gold2:   #b8913f;
+  --gold3:   #e8c97a;
+  --text:    #1e0000;
+  --muted:   #8a6050;
+}
+
+/* ===== COVER ===== */
+#cover {
+  position: fixed; inset: 0;
+  background: #1a0000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 1000; padding: 40px 28px;
+  text-align: center;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+#cover.hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+
+.cover-bismillah {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 24px; color: var(--gold);
+  direction: rtl; unicode-bidi: embed;
+  letter-spacing: 2px; line-height: 1.6;
+  margin-bottom: 36px; opacity: 0.9;
+}
+.cover-dear {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 18px;
+  color: rgba(240,235,224,0.7); margin-bottom: 6px;
+}
+.cover-beloved { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 46px;
+  color: var(--gold); line-height: 1.1; margin-bottom: 42px;
+}
+.cover-groom { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-weight: 300;
+  font-size: 66px; color: white; line-height: 1;
+}
+.cover-amp { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 48px;
+  color: var(--gold); margin: 4px 0;
+}
+.cover-bride { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-weight: 300;
+  font-size: 66px; color: white; line-height: 1;
+  margin-bottom: 28px;
+}
+.cover-date {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300; font-size: 11px;
+  letter-spacing: 5px; color: rgba(240,235,224,0.65);
+  margin-bottom: 6px;
+}
+.cover-venue {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 16px;
+  color: rgba(240,235,224,0.55); margin-bottom: 44px;
+}
+.open-btn {
+  width: 100%; max-width: 300px;
+  border: 1px solid var(--gold); background: transparent;
+  color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300; font-size: 11px;
+  letter-spacing: 4px; text-transform: uppercase;
+  padding: 18px 24px; cursor: pointer;
+  transition: background 0.3s;
+}
+.open-btn:active { background: rgba(201,165,90,0.12); }
+
+/* ===== MAIN ===== */
+#main { display: none; }
+#main.show { display: block; }
+
+/* FLOATING BUTTONS */
+.floats {
+  position: fixed; right: 18px; bottom: 28px;
+  display: flex; flex-direction: column; gap: 12px; z-index: 900;
+}
+.float-wa {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+.float-wa svg { width: 27px; height: 27px; fill: white; }
+.float-music {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: #2e1e04;
+  border: 2px solid var(--gold2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: border-color 0.3s;
+}
+.float-music.playing { border-color: var(--gold3); animation: pulse 1.5s infinite; }
+.float-music svg { width: 22px; height: 22px; fill: var(--gold); }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,165,90,0.4)} 50%{box-shadow:0 0 0 8px rgba(201,165,90,0)} }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative; width: 100%;
+  min-height: 100vh; background: #1a0000;
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%; height: 100vh;
+  object-fit: cover; display: block;
+}
+/* Placeholder styling */
+.hero-img-ph {
+  width: 100%; height: 100vh;
+  background: linear-gradient(180deg, #5a0000 0%, #2a0000 50%, #100000 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.ph-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(201,165,90,0.3);
+}
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 80px 28px 32px;
+  background: linear-gradient(to top, rgba(8,4,0,0.95) 0%, rgba(8,4,0,0.6) 60%, transparent 100%);
+  text-align: center;
+}
+.hero-bless {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(201,165,90,0.65); margin-bottom: 12px;
+}
+.hero-groom-n { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-weight: 300;
+  font-size: 62px; color: white; line-height: 1;
+}
+.hero-amp-n { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 40px;
+  color: var(--gold); margin: 4px 0;
+}
+.hero-bride-n { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-weight: 300;
+  font-size: 62px; color: white; line-height: 1;
+}
+.hero-date-n {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300; font-size: 11px;
+  letter-spacing: 5px; color: rgba(240,235,224,0.7);
+  margin-top: 14px;
+}
+
+/* ===== SECTION SHARED ===== */
+.sec-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 18px;
+}
+.dark .sec-label { color: rgba(201,165,90,0.65); }
+.divider {
+  display: flex; align-items: center;
+  justify-content: center; gap: 10px;
+  margin: 28px 0;
+}
+.div-line { width: 56px; height: 1px; background: var(--gold2); opacity: 0.4; }
+.div-gems { color: var(--gold2); font-size: 13px; }
+
+/* ===== INVITATION ===== */
+.invitation-sec {
+  background: var(--cream); padding: 70px 28px 60px;
+  text-align: center;
+}
+.inv-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 38px; font-weight: 400;
+  color: var(--text); line-height: 1.2; margin-bottom: 28px;
+}
+.inv-text {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 18px;
+  color: #5a4020; line-height: 1.7;
+}
+.couple-formal {
+  font-family: 'Dancing Script', cursive;
+  font-size: 23px; font-weight: 600;
+  color: var(--text); margin: 8px 0 12px;
+}
+.countdown-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 4px; color: var(--gold2);
+  text-transform: uppercase; margin-bottom: 22px;
+}
+.countdown {
+  display: flex; justify-content: center;
+  align-items: center; gap: 12px;
+}
+.cnt-item { text-align: center; }
+.cnt-num {
+  font-family: 'Dancing Script', cursive;
+  font-size: 54px; font-weight: 300;
+  color: var(--text); line-height: 1;
+  display: block;
+}
+.cnt-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 3px; color: var(--muted);
+  text-transform: uppercase; margin-top: 4px;
+}
+.cnt-dot {
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px; color: var(--gold2);
+  margin-bottom: 18px;
+}
+
+/* ===== GALLERY ===== */
+.gallery-sec {
+  background: var(--dark2); padding: 68px 0 55px;
+  text-align: center;
+}
+.gallery-title { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 36px;
+  color: white; margin-bottom: 32px;
+  padding: 0 28px;
+}
+.carousel-wrap { position: relative; overflow: hidden; padding: 0 28px; }
+.carousel-track {
+  display: flex; gap: 18px;
+  transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.c-slide {
+  min-width: calc(100% - 56px);
+  position: relative; border-radius: 14px; overflow: hidden;
+}
+.slide-ph {
+  width: 100%; padding-top: 100%;
+  border-radius: 14px; overflow: hidden;
+  position: relative;
+}
+.slide-ph-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #5a0000, #1a0000);
+  display: flex; align-items: center; justify-content: center;
+}
+.slide-ph img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.slide-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 40px 22px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+}
+.slide-cap-txt {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 16px;
+  color: rgba(255,255,255,0.88);
+}
+.c-nav {
+  display: flex; align-items: center;
+  justify-content: center; gap: 16px;
+  margin-top: 24px; padding: 0 28px;
+}
+.c-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(201,165,90,0.35);
+  background: transparent; color: var(--gold);
+  font-size: 17px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.c-dots { display: flex; gap: 8px; }
+.cdot {
+  height: 8px; border-radius: 4px;
+  background: rgba(201,165,90,0.3);
+  transition: all 0.3s; width: 8px;
+}
+.cdot.on { width: 26px; background: var(--gold); }
+
+/* ===== EVENTS ===== */
+.events-sec {
+  background: var(--cream); padding: 70px 28px 60px;
+  text-align: center;
+}
+.events-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 38px; font-weight: 400;
+  color: var(--text); margin-bottom: 32px;
+}
+.ev-card {
+  background: white; border-radius: 18px;
+  padding: 34px 24px; margin-bottom: 18px;
+  box-shadow: 0 2px 22px rgba(0,0,0,0.07);
+}
+.ev-card.ev-dark {
+  background: var(--dark); color: white;
+}
+.ev-type {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.ev-date {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px; font-weight: 300;
+  color: var(--text); line-height: 1;
+}
+.ev-card.ev-dark .ev-date { color: white; }
+.ev-day {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 22px;
+  color: var(--gold); margin: 4px 0 6px;
+}
+.ev-hijri {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; color: rgba(201,165,90,0.7);
+  margin-bottom: 10px;
+}
+.ev-time {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 300;
+  letter-spacing: 3px; color: var(--muted);
+  margin-bottom: 14px;
+}
+.ev-card.ev-dark .ev-time { color: rgba(201,165,90,0.6); }
+.ev-venue {
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px; font-weight: 500;
+  color: var(--text); margin-bottom: 6px;
+}
+.ev-card.ev-dark .ev-venue { color: white; }
+.ev-addr {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 300;
+  line-height: 1.9; color: var(--muted);
+  margin-bottom: 22px;
+}
+.ev-card.ev-dark .ev-addr { color: rgba(240,235,224,0.55); }
+.map-btn {
+  display: block; width: 100%;
+  border: 1px solid rgba(201,165,90,0.35);
+  background: transparent; color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 15px 20px; text-decoration: none;
+  border-radius: 6px; transition: background 0.3s;
+  cursor: pointer;
+}
+.map-btn:active { background: rgba(201,165,90,0.1); }
+
+/* CONTACT CARD */
+.contact-card {
+  background: var(--dark); border-radius: 18px;
+  padding: 30px 24px; margin-top: 18px;
+  text-align: center;
+}
+.contact-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+.contact-item { margin-bottom: 16px; }
+.contact-item:last-child { margin-bottom: 0; }
+.contact-who {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(240,235,224,0.5); margin-bottom: 4px;
+}
+.contact-num {
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px; color: white;
+}
+.contact-num a { color: white; text-decoration: none; }
+
+/* ===== QUOTE ===== */
+.quote-sec {
+  background: var(--cream); padding: 70px 40px;
+  text-align: center;
+}
+.arabic-verse {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 22px; color: var(--gold2);
+  direction: rtl; unicode-bidi: embed;
+  line-height: 1.9; margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+.quote-txt {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 20px;
+  color: var(--text); line-height: 1.75;
+  margin-bottom: 16px;
+}
+.quote-src {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold2);
+}
+
+/* ===== FAMILY ===== */
+.family-sec {
+  background: var(--cream2); padding: 70px 28px 60px;
+  text-align: center;
+}
+.family-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px; font-weight: 400;
+  color: var(--text); margin-bottom: 32px;
+  line-height: 1.25;
+}
+.fam-card {
+  background: white; border-radius: 18px;
+  padding: 30px 24px; margin-bottom: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  text-align: left;
+}
+.fam-role {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold2); text-align: center;
+  margin-bottom: 12px;
+}
+.fam-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 26px; font-weight: 500;
+  color: var(--text); text-align: center;
+  margin-bottom: 22px;
+}
+.fam-divider {
+  width: 40px; height: 1px;
+  background: var(--gold2); opacity: 0.3;
+  margin: 0 auto 20px;
+}
+.fam-row {
+  display: flex; gap: 10px;
+  align-items: flex-start; margin-bottom: 14px;
+}
+.fam-row:last-child { margin-bottom: 0; }
+.fam-gem { color: var(--gold2); font-size: 10px; margin-top: 6px; flex-shrink: 0; }
+.fam-info { flex: 1; }
+.fam-info-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #a08060; margin-bottom: 3px;
+}
+.fam-info-val {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px; color: var(--text);
+  line-height: 1.4;
+}
+.late { opacity: 0.6; font-style: italic; }
+.regards { margin-top: 44px; }
+.regards-names {
+  font-family: 'Dancing Script', cursive;
+  font-size: 17px; font-weight: 400;
+  color: var(--text); line-height: 1.8;
+}
+
+/* ===== WISHES ===== */
+.wishes-sec {
+  background: var(--dark); padding: 70px 28px 60px;
+  text-align: center;
+}
+.wishes-title { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 40px;
+  color: white; margin-bottom: 34px;
+}
+.w-input {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(201,165,90,0.2);
+  border-radius: 10px; padding: 15px 18px;
+  color: white;
+  font-family: 'Dancing Script', cursive;
+  font-size: 17px; margin-bottom: 12px;
+  outline: none; -webkit-appearance: none;
+}
+.w-input::placeholder { color: rgba(255,255,255,0.3); }
+.w-input:focus { border-color: rgba(201,165,90,0.45); }
+textarea.w-input { height: 96px; resize: none; }
+.send-btn {
+  width: 100%; background: transparent;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase;
+  padding: 16px; cursor: pointer;
+  border-radius: 6px; margin-bottom: 38px;
+  transition: background 0.3s;
+}
+.send-btn:active { background: rgba(201,165,90,0.1); }
+.wish-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px; padding: 20px;
+  margin-bottom: 14px; text-align: left;
+}
+.wish-who {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.wish-msg {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 18px;
+  color: rgba(240,235,224,0.82); line-height: 1.5;
+}
+.load-more {
+  background: transparent;
+  border: 1px solid rgba(201,165,90,0.25);
+  color: rgba(201,165,90,0.6);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 14px 28px; cursor: pointer;
+  width: 100%; border-radius: 6px; margin-top: 8px;
+}
+.wish-count {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(201,165,90,0.65); margin: -24px 0 28px;
+}
+.wish-skel {
+  height: 74px; border-radius: 12px; margin-bottom: 14px;
+  background: linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
+  background-size: 200% 100%; animation: skel 1.4s ease infinite;
+}
+@keyframes skel { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.wish-empty {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 18px;
+  color: rgba(240,235,224,0.55); padding: 18px 0;
+}
+.wish-card { position: relative; }
+.wish-heart {
+  position: absolute; top: 16px; right: 16px;
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; color: rgba(240,235,224,0.35);
+  letter-spacing: 1px; padding: 4px;
+  transition: color 0.3s, transform 0.2s;
+}
+.wish-heart.liked { color: var(--gold); transform: scale(1.1); }
+
+/* ===== WISH REPLIES + ADMIN ===== */
+.wish-reply {
+  margin-top: 12px; padding: 10px 14px;
+  border-left: 2px solid var(--gold);
+  background: rgba(201,165,90,0.07);
+  border-radius: 0 8px 8px 0; text-align: left;
+}
+.wish-reply-who {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 300; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 5px;
+}
+.wish-reply-msg {
+  font-family: 'Dancing Script', cursive; font-style: italic;
+  font-size: 16px; color: rgba(240,235,224,0.85); line-height: 1.5;
+}
+.reply-new { animation: replyGlow 2.4s ease 3; }
+@keyframes replyGlow { 0%,100%{box-shadow:none} 50%{box-shadow:0 0 0 2px var(--gold)} }
+.wish-admin-btn {
+  margin-top: 10px; background: transparent;
+  border: 1px solid rgba(201,165,90,0.4); color: var(--gold);
+  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 5px; cursor: pointer; margin-right: 8px;
+}
+.reply-editor { margin-top: 10px; }
+.reply-editor textarea {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(201,165,90,0.3); border-radius: 8px;
+  padding: 10px 12px; color: white; font-family: 'Dancing Script', cursive;
+  font-size: 16px; height: 70px; resize: none; outline: none;
+  margin-bottom: 8px; -webkit-appearance: none;
+}
+#adminBar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2500; display: none;
+  background: rgba(20,18,12,0.96); color: var(--gold);
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; text-align: center;
+}
+#adminBar button {
+  background: transparent; border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 2px;
+  padding: 4px 10px; border-radius: 4px; margin-left: 10px; cursor: pointer;
+}
+#pinModal {
+  position: fixed; inset: 0; z-index: 2600; display: none;
+  background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
+}
+.pin-box {
+  background: var(--dark); border: 1px solid rgba(201,165,90,0.35);
+  border-radius: 14px; padding: 28px 24px; width: 280px; max-width: 86vw;
+  text-align: center;
+}
+.pin-title {
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; color: var(--gold); margin-bottom: 16px;
+}
+.pin-box input {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(201,165,90,0.3); border-radius: 8px;
+  padding: 12px; color: white; text-align: center; letter-spacing: 4px;
+  font-family: 'Montserrat', sans-serif; font-size: 14px; outline: none;
+  margin-bottom: 14px; -webkit-appearance: none;
+}
+.admin-link {
+  margin-top: 22px; background: transparent;
+  border: 1px solid rgba(201,165,90,0.25); color: rgba(201,165,90,0.55);
+  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 8px 22px; border-radius: 5px; cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--dark2); padding: 52px 28px 40px;
+  text-align: center;
+}
+.footer-names { font-family: 'Great Vibes', cursive !important;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic; font-size: 44px;
+  color: var(--gold); margin-bottom: 14px;
+}
+.footer-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 5px; color: rgba(240,235,224,0.5);
+  margin-bottom: 28px;
+}
+.footer-line { width: 60px; height: 1px; background: rgba(201,165,90,0.25); margin: 0 auto 24px; }
+.footer-credit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(240,235,224,0.25);
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     LANDING PAGE
-════════════════════════════════════════ -->
-<div id="landing-page">
-  <div class="landing-bg"></div>
+<!-- ===== FIREBASE (COMPAT) ===== -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-
-
-  <div class="landing-content">
-    <div class="landing-bismillah" style="font-size:21px;color:var(--gold-light);margin-bottom:20px;direction:rtl;opacity:.92">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="landing-label">WITH THE BLESSINGS OF ALMIGHTY ALLAH</div>
-
-    <!-- Warm generic greeting (Standard tier — no per-guest personalisation) -->
-    <div class="landing-guest-wrap" id="landingGuestWrap">
-      <div class="landing-guest-line">Dear</div>
-      <div class="landing-guest-name" id="landingGuestName">Beloved Guest</div>
-    </div>
-
-    <div class="landing-names">Janna</div>
-    <span class="landing-amp">&amp;</span>
-    <div class="landing-names">Shamil</div>
-
-    <div class="landing-date">08 · AUGUST · 2026</div>
-    <div class="landing-venue">Hiltop Auditorium, Kozhikode</div>
-
-    <button class="landing-open-btn" id="openInviteBtn">
-      OPEN INVITATION <span class="btn-icon">↓</span>
-    </button>
-  </div>
-
-
+<!-- ===== COVER ===== -->
+<div id="cover">
+  <div class="cover-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div class="cover-dear">Dear</div>
+  <div class="cover-beloved">Beloved Guest</div>
+  <div class="cover-groom">Janna</div>
+  <div class="cover-amp">&</div>
+  <div class="cover-bride">Shamil</div>
+  <div class="cover-date">0 8 · A U G U S T · 2 0 2 6</div>
+  <div class="cover-venue">Hiltop Auditorium, Kozhikode</div>
+  <button class="open-btn" onclick="openInvitation()">OPEN INVITATION ↓</button>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MAIN INVITATION
-════════════════════════════════════════ -->
-<div id="main-invitation">
+<!-- ===== MAIN ===== -->
+<div id="main">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-photo-slot" data-slot="hero_photo" style="position:absolute;inset:0;overflow:hidden">
-    <img class="hero-img" id="heroImg" crossorigin="anonymous" alt="Janna &amp; Shamil" style="display:none"/>
-    <button class="img-delete-btn no-pdf" onclick="deleteSlotImage('hero_photo', this)" title="Remove photo">✕</button>
-    <div class="img-slot-add no-pdf" onclick="pickImage('hero_photo')"><div class="plus">+</div><span>ADD HERO PHOTO</span></div>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-blessing">WITH THE BLESSINGS OF ALMIGHTY ALLAH</div>
-    <span class="hero-cross"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M16.5 3a9 9 0 1 0 4.4 7.9A7 7 0 1 1 16.5 3z"/><path d="M19.6 3.6l.45 1.45 1.45.45-1.45.45-.45 1.45-.45-1.45L17.7 5.5l1.45-.45z"/></svg></span>
-    <div class="hero-name">Janna</div>
-    <span class="hero-amp">&amp;</span>
-    <div class="hero-name">Shamil</div>
-    <div class="hero-date">08 · AUGUST · 2026</div>
-  </div>
-</section>
-
-<!-- INVITE -->
-<section class="invite-section reveal">
-  <div class="section-label">WITH THE BLESSINGS OF ALMIGHTY ALLAH</div>
-  <h1 class="section-title">You Are Cordially Invited</h1>
-  <p class="invite-text">We joyfully announce the Nikah of</p>
-  <p class="invite-names">Janna Parween &amp; Shamil Ashraf</p>
-  <p class="invite-text">and humbly request your gracious presence<br/>to share in this blessed occasion.</p>
-
-  <div class="divider-stars">✦ ✦ ✦</div>
-
-  <!-- COUNTDOWN -->
-  <div class="countdown-wrap">
-    <div class="countdown-label" id="cdLabel">DAYS UNTIL FOREVER</div>
-    <div class="countdown">
-      <div class="cd-item">
-        <span class="cd-num" id="cd-days">00</span>
-        <span class="cd-label">DAYS</span>
-      </div>
-      <div class="cd-dot">·</div>
-      <div class="cd-item">
-        <span class="cd-num" id="cd-hours">00</span>
-        <span class="cd-label">HOURS</span>
-      </div>
-      <div class="cd-dot">·</div>
-      <div class="cd-item">
-        <span class="cd-num" id="cd-mins">00</span>
-        <span class="cd-label">MINS</span>
-      </div>
-      <div class="cd-dot">·</div>
-      <div class="cd-item">
-        <span class="cd-num" id="cd-secs">00</span>
-        <span class="cd-label">SECS</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery-section reveal">
-  <div class="section-label">OUR MOMENTS</div>
-  <h2 class="section-title">A Love Story in Frames</h2>
-  <div class="carousel-wrap">
-    <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide">
-        <div class="carousel-slide-inner" data-slot="gallery_1">
-          <img class="slot-img" crossorigin="anonymous" alt="Janna &amp; Shamil" style="display:none"/>
-          <div class="gallery-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>PHOTO 1</span></div>
-          <button class="img-delete-btn no-pdf" onclick="deleteSlotImage('gallery_1', this)" title="Remove photo">✕</button>
-          <div class="img-slot-add no-pdf" onclick="pickImage('gallery_1')"><div class="plus">+</div><span>ADD PHOTO</span></div>
-          <div class="carousel-quote">
-            <p>Every love story is beautiful, but ours is my favourite.</p>
-            <span class="carousel-quote-line"></span>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-slide">
-        <div class="carousel-slide-inner" data-slot="gallery_2">
-          <img class="slot-img" crossorigin="anonymous" alt="Janna &amp; Shamil" style="display:none"/>
-          <div class="gallery-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>PHOTO 2</span></div>
-          <button class="img-delete-btn no-pdf" onclick="deleteSlotImage('gallery_2', this)" title="Remove photo">✕</button>
-          <div class="img-slot-add no-pdf" onclick="pickImage('gallery_2')"><div class="plus">+</div><span>ADD PHOTO</span></div>
-          <div class="carousel-quote">
-            <p>Together is a wonderful place to be.</p>
-            <span class="carousel-quote-line"></span>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-slide">
-        <div class="carousel-slide-inner" data-slot="gallery_3">
-          <img class="slot-img" crossorigin="anonymous" alt="Janna &amp; Shamil" style="display:none"/>
-          <div class="gallery-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>PHOTO 3</span></div>
-          <button class="img-delete-btn no-pdf" onclick="deleteSlotImage('gallery_3', this)" title="Remove photo">✕</button>
-          <div class="img-slot-add no-pdf" onclick="pickImage('gallery_3')"><div class="plus">+</div><span>ADD PHOTO</span></div>
-          <div class="carousel-quote">
-            <p>You are my today and all of my tomorrows.</p>
-            <span class="carousel-quote-line"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="carousel-controls no-pdf">
-    <button class="carousel-btn" id="prevBtn">&#8592;</button>
-    <div class="carousel-dots" id="dotsWrap">
-      <div class="dot active" data-idx="0"></div>
-      <div class="dot" data-idx="1"></div>
-      <div class="dot" data-idx="2"></div>
-    </div>
-    <button class="carousel-btn" id="nextBtn">&#8594;</button>
-  </div>
-</section>
-
-<!-- CEREMONY -->
-<section class="ceremony-section reveal">
-  <div class="section-label">SAVE THE DATE</div>
-  <h2 class="section-title">The Nikah Ceremony</h2>
-
-  <!-- Nikah (main) -->
-  <div class="event-card">
-    <div class="event-card-label">NIKAH CEREMONY</div>
-    <div class="event-date-big">08.08.2026</div>
-    <div class="event-day">Saturday</div>
-    <div class="event-hijri">SAFAR 24, 1448 AH</div>
-    <div class="event-time">12:30 PM ONWARDS</div>
-    <div class="event-venue-name">Hiltop Auditorium</div>
-    <div class="event-venue-addr">Purakkatiri<br/>Kozhikode, Kerala</div>
-    <a href="https://maps.google.com/?q=Hiltop+Auditorium+Purakkatiri+Kozhikode+Kerala" target="_blank" class="map-btn">
-      📍 VIEW ON MAPS
+  <!-- FLOATING BUTTONS -->
+  <div class="floats">
+    <a href="https://wa.me/97334344863" class="float-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
+    <div class="float-music" id="musicBtn" onclick="toggleMusic()">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
   </div>
 
-  <!-- Contact -->
-  <div class="eng-card">
-    <div class="event-card-label">CONTACT</div>
-    <div class="contact-line"><span class="contact-who">Haris KV</span><a href="https://wa.me/97334344863" class="contact-num">+973 343 44863 · WhatsApp</a></div>
-    <div class="contact-line"><span class="contact-who">Abdul Azeez</span><a href="tel:+919446005544" class="contact-num">+91 94460 05544</a></div>
-    <div class="contact-line"><span class="contact-who">Nahas TP</span><a href="tel:+919645514401" class="contact-num">+91 96455 14401</a></div>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-img" src="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto,w_1600/digiwed-invitations/shamil-janna/hero-v1.jpg" alt="Janna & Shamil">
+    <div class="hero-overlay">
+      <div class="hero-bless">✦ WITH THE BLESSINGS OF ALLAH ✦</div>
+      <div class="hero-groom-n">Janna</div>
+      <div class="hero-amp-n">&</div>
+      <div class="hero-bride-n">Shamil</div>
+      <div class="hero-date-n">0 8 &nbsp;·&nbsp; A U G U S T &nbsp;·&nbsp; 2 0 2 6</div>
+    </div>
+  </section>
 
-<!-- SCRIPTURE -->
-<section class="scripture-section reveal">
-  <div class="scripture-mark"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M16.5 3a9 9 0 1 0 4.4 7.9A7 7 0 1 1 16.5 3z"/><path d="M19.6 3.6l.45 1.45 1.45.45-1.45.45-.45 1.45-.45-1.45L17.7 5.5l1.45-.45z"/></svg></div>
-  <p class="scripture-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</p>
-  <p class="scripture-text">"And of His signs is that He created for you from yourselves mates that you may find tranquility in them."</p>
-  <div class="scripture-ref">— QURAN 30:21</div>
-</section>
+  <!-- INVITATION -->
+  <section class="invitation-sec">
+    <div class="sec-label">WITH THE BLESSINGS OF ALMIGHTY ALLAH</div>
+    <h2 class="inv-title">You Are Cordially Invited</h2>
+    <p class="inv-text">We joyfully announce the Nikah of</p>
+    <div class="couple-formal">Janna Parween &amp; Shamil Ashraf</div>
+    <p class="inv-text">and humbly request your gracious presence<br>to share in this blessed occasion.</p>
+    <div class="divider">
+      <div class="div-line"></div>
+      <span class="div-gems">◆ ◆ ◆</span>
+      <div class="div-line"></div>
+    </div>
+    <div class="countdown-lbl" id="cdHeading">DAYS UNTIL FOREVER</div>
+    <div class="countdown">
+      <div class="cnt-item"><span class="cnt-num" id="cDays">--</span><span class="cnt-lbl">DAYS</span></div>
+      <span class="cnt-dot">·</span>
+      <div class="cnt-item"><span class="cnt-num" id="cHrs">--</span><span class="cnt-lbl">HOURS</span></div>
+      <span class="cnt-dot">·</span>
+      <div class="cnt-item"><span class="cnt-num" id="cMins">--</span><span class="cnt-lbl">MINS</span></div>
+      <span class="cnt-dot">·</span>
+      <div class="cnt-item"><span class="cnt-num" id="cSecs">--</span><span class="cnt-lbl">SECS</span></div>
+    </div>
+  </section>
 
-<!-- FAMILIES -->
-<section class="families-section reveal">
-  <div class="section-label">OUR FAMILIES</div>
-  <h2 class="section-title">With the Blessings of Our Parents</h2>
+  <!-- EVENTS -->
+  <section class="events-sec">
+    <div class="sec-label">SAVE THE DATE</div>
+    <h2 class="events-title">The Wedding Ceremony</h2>
 
-  <!-- Bride -->
-  <div class="family-card">
-    <div class="family-card-label">BRIDE'S FAMILY</div>
-    <div class="family-person-name">Janna Parween</div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">FATHER</div><div class="family-name">Haris Kozhikoden Veettil</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">MOTHER</div><div class="family-name">Nazareena Thekke Puthalath</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">PATERNAL GRANDPARENTS</div><div class="family-name">Abdul Azeez Kozhikoden Veettil &amp; Sara Kutti Veettil</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">MATERNAL GRANDPARENTS</div><div class="family-name">Late Abdul Latheef Thekke Puthalath &amp; Late Fathima Koyappurath</div></div></div>
-  </div>
+    <div class="ev-card">
+      <div class="ev-date">08.08.2026</div>
+      <div class="ev-day">Saturday</div>
+      <div class="ev-hijri">SAFAR 24, 1448 AH</div>
+      <div class="ev-time">12:30 ONWARDS</div>
+      <div class="ev-venue">Hiltop Auditorium</div>
+      <div class="ev-addr">Purakkatiri<br>Kozhikode, Kerala</div>
+      <a href="https://maps.google.com/?q=Hiltop+Auditorium+Purakkatiri+Kozhikode+Kerala" target="_blank" class="map-btn">📍 VIEW ON MAPS</a>
+    </div>
 
-  <!-- Groom -->
-  <div class="family-card">
-    <div class="family-card-label">GROOM'S FAMILY</div>
-    <div class="family-person-name">Shamil Ashraf</div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">FATHER</div><div class="family-name">Late Mohammad Ashraf MC</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">MOTHER</div><div class="family-name">Sajida Ashraf</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">PATERNAL GRANDPARENTS</div><div class="family-name">Late MC. Aboobacker Moideenganakath &amp; Late P Kunhi Beevi</div></div></div>
-    <div class="family-row"><span class="family-diamond">◆</span><div><div class="family-role">MATERNAL GRANDPARENTS</div><div class="family-name">Aalikutty M &amp; Late Kadeeja V</div></div></div>
-  </div>
+    <div class="contact-card">
+      <div class="contact-lbl">CONTACT</div>
+      <div class="contact-item">
+        <div class="contact-who">Haris KV (WhatsApp)</div>
+        <div class="contact-num"><a href="https://wa.me/97334344863">+973 343 44863</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-who">Abdul Azeez</div>
+        <div class="contact-num"><a href="tel:+919446005544">+91 94460 05544</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-who">Nahas TP</div>
+        <div class="contact-num"><a href="tel:+919645514401">+91 96455 14401</a></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Best regards -->
-  <div class="family-card" style="text-align:center">
-    <div class="family-card-label">BEST REGARDS</div>
-    <div class="family-name" style="line-height:2;color:var(--text-mid)">Riyas KV<br/>Anas KV<br/>Nahas TP</div>
-  </div>
-</section>
+  <!-- QURAN VERSE -->
+  <section class="quote-sec">
+    <div class="arabic-verse">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</div>
+    <p class="quote-txt">"And of His signs is that He created for you from yourselves mates that you may find tranquility in them."</p>
+    <div class="quote-src">— QURAN 30:21</div>
+  </section>
 
+  <!-- FAMILY -->
+  <section class="family-sec">
+    <div class="sec-label">OUR FAMILIES</div>
+    <h2 class="family-title">With the Blessings of Our Parents</h2>
 
+    <!-- BRIDE FAMILY -->
+    <div class="fam-card">
+      <div class="fam-role">BRIDE'S FAMILY</div>
+      <div class="fam-name">Janna Parween</div>
+      <div class="fam-divider"></div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Father</div>
+          <div class="fam-info-val">Haris Kozhikoden Veettil</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Mother</div>
+          <div class="fam-info-val">Nazareena Thekke Puthalath</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Paternal Grandparents</div>
+          <div class="fam-info-val">Abdul Azeez Kozhikoden Veettil &amp; Sara Kutti Veettil</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Maternal Grandparents</div>
+          <div class="fam-info-val"><span class="late">Late</span> Abdul Latheef Thekke Puthalath &amp; <span class="late">Late</span> Fathima Koyappurath</div>
+        </div>
+      </div>
+    </div>
 
-<!-- WISHES -->
-<section class="wishes-section reveal">
-  <div class="section-label">WISHES</div>
-  <h2 class="section-title">Send Your Blessings</h2>
-  <div class="wish-count-wrap" id="wishCountWrap" style="display:none">✨ <b id="wishCount">0</b> blessings received</div>
-  <input class="wish-input" id="wName" type="text" placeholder="Your Name"/>
-  <textarea class="wish-input" id="wMsg" placeholder="Write your heartfelt wish..."></textarea>
-  <button class="send-btn" onclick="sendWish()">SEND WISHES &nbsp;✦</button>
+    <!-- GROOM FAMILY -->
+    <div class="fam-card">
+      <div class="fam-role">GROOM'S FAMILY</div>
+      <div class="fam-name">Shamil Ashraf</div>
+      <div class="fam-divider"></div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Father</div>
+          <div class="fam-info-val"><span class="late">Late</span> Mohammad Ashraf MC</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Mother</div>
+          <div class="fam-info-val">Sajida Ashraf</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Paternal Grandparents</div>
+          <div class="fam-info-val"><span class="late">Late</span> MC. Aboobacker Moideenganakath &amp; <span class="late">Late</span> P Kunhi Beevi</div>
+        </div>
+      </div>
+      <div class="fam-row">
+        <span class="fam-gem">◆</span>
+        <div class="fam-info">
+          <div class="fam-info-lbl">Maternal Grandparents</div>
+          <div class="fam-info-val">Aalikutty M &amp; <span class="late">Late</span> Kadeeja V</div>
+        </div>
+      </div>
+    </div>
 
-  <div class="wishes-grid" id="wishesGrid">
-    <div class="wish-skel"></div><div class="wish-skel"></div><div class="wish-skel"></div>
-  </div>
+    <!-- BEST REGARDS -->
+    <div class="regards">
+      <div class="fam-role">BEST REGARDS</div>
+      <div class="regards-names">Riyas KV<br>Anas KV<br>Nahas TP</div>
+    </div>
+  </section>
 
-  <div class="loadmore-wrap">
-    <button class="loadmore-btn" id="loadMoreBtn" onclick="loadMore()" style="display:none">LOAD MORE WISHES</button>
-  </div>
-</section>
+  <!-- WISHES -->
+  <section class="wishes-sec">
+    <div class="sec-label" style="color:rgba(201,165,90,0.65)">WISHES</div>
+    <h2 class="wishes-title">Send Your Blessings</h2>
+    <div class="wish-count" id="wishCountWrap" style="display:none">✨ <span id="wishCount">0</span> blessings received</div>
+    <input type="text" class="w-input" id="wName" placeholder="Your Name" autocomplete="off">
+    <textarea class="w-input" id="wMsg" placeholder="Write your heartfelt wish..."></textarea>
+    <button class="send-btn" onclick="sendWish()">SEND WISHES ◆</button>
+    <div id="wishesList">
+      <div class="wish-skel"></div><div class="wish-skel"></div><div class="wish-skel"></div>
+    </div>
+    <button class="load-more" id="loadMoreBtn" onclick="loadMore()" style="display:none">LOAD MORE WISHES</button>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-names">Janna &amp; Shamil</div>
-  <div class="footer-date">08 · AUGUST · 2026</div>
-  <div class="footer-divider"></div>
-  <div class="footer-credit">CRAFTED WITH ♥ BY DIGIWED</div>
-  <div style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:18px">
-    <button id="pdfDownloadBtn" type="button" onclick="downloadInvitePDF()" class="no-pdf" aria-label="Download invitation as PDF" title="Save as PDF" style="background:none;border:none;cursor:pointer;opacity:.55;padding:8px;display:inline-flex;align-items:center;justify-content:center;transition:opacity .25s">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-light)"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
-    </button>
-    <button class="admin-link no-pdf" onclick="openPin()">ADMIN</button>
-  </div>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-names">Janna &amp; Shamil</div>
+    <div class="footer-date">0 8 &nbsp;·&nbsp; A U G U S T &nbsp;·&nbsp; 2 0 2 6</div>
+    <div class="footer-line"></div>
+    <div class="footer-credit" id="dwCredit">CRAFTED WITH ♥ BY DIGIWED</div>
+    <button class="admin-link" onclick="openPin()">ADMIN</button>
+  </footer>
 
-<!-- FLOATING BUTTONS -->
-<a href="https://wa.me/97334344863" class="float-wa no-pdf" target="_blank">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.529 5.855L0 24l6.335-1.652C8.05 23.418 9.983 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.88 0-3.63-.513-5.13-1.402l-.368-.217-3.76.98.998-3.652-.24-.376C2.538 15.558 2.182 13.822 2.182 12c0-5.415 4.403-9.818 9.818-9.818 5.414 0 9.818 4.403 9.818 9.818 0 5.414-4.404 9.818-9.818 9.818z"/>
-  </svg>
-</a>
+</div><!-- /main -->
 
-<!-- music control is #musicToggle (below) -->
+<div id="toast" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(80px);
+  background:rgba(20,18,12,.95);color:#f0ebe0;padding:12px 22px;border-radius:30px;
+  font-family:'Montserrat',sans-serif;font-size:13px;letter-spacing:.5px;z-index:3000;
+  opacity:0;transition:all .35s ease;pointer-events:none;max-width:86vw;text-align:center;"></div>
 
-</div><!-- /main-invitation -->
+<div id="adminBar">ADMIN MODE — REPLY TO WISHES BELOW<button onclick="exitAdmin()">EXIT</button></div>
 
-<!-- ADMIN / TOAST / BGM-UPLOAD UI (outside main-invitation so always available) -->
-<div id="adminBar" class="no-pdf">ADMIN MODE — UPLOAD PHOTOS / BGM &amp; REPLY TO WISHES<button onclick="exitAdmin()">EXIT</button></div>
-<div id="pinModal" class="no-pdf">
+<div id="pinModal">
   <div class="pin-box">
     <div class="pin-title">ADMIN ACCESS</div>
-    <input id="pinInput" type="password" placeholder="PIN" autocomplete="off"/>
+    <input id="pinInput" type="password" placeholder="PIN" autocomplete="off">
     <div>
       <button class="wish-admin-btn" onclick="checkPin()">ENTER</button>
       <button class="wish-admin-btn" onclick="closePin()" style="margin-right:0">CANCEL</button>
     </div>
   </div>
 </div>
-<div id="toast" class="no-pdf" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(80px);background:rgba(26,21,16,.96);color:#f7f1e6;padding:12px 22px;border-radius:30px;font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.5px;z-index:3000;opacity:0;transition:all .35s ease;pointer-events:none;max-width:86vw;text-align:center;"></div>
 
-<button id="bgmUploadBtn" class="no-pdf" onclick="document.getElementById('bgmFileInput').click()" title="Upload BGM">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="19" y1="1" x2="19" y2="7"/><line x1="16" y1="4" x2="22" y2="4"/></svg>
-</button>
-<input type="file" id="bgmFileInput" accept="audio/*" style="display:none" onchange="onBgmFileSelected(this)"/>
-<div id="bgmProgOverlay" class="no-pdf"><div id="bgmProgLabel">UPLOADING BGM…</div><div id="bgmProgBar"><div id="bgmProgFill"></div></div></div>
-
-<!-- ═══════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════════ -->
 <script>
-// ── Firebase Config ─────────────────────────────
-// 🔧 REPLACE with your Firebase project credentials
-const firebaseConfig = {
-  apiKey:            "AIzaSyB41fvxvl1KeHOro6WKJ72o22izuCpJ-b4",
-  authDomain:        "yaseen-jumana-wedding.firebaseapp.com",
-  databaseURL:       "https://yaseen-jumana-wedding-default-rtdb.firebaseio.com",
-  projectId:         "yaseen-jumana-wedding",
-  storageBucket:     "yaseen-jumana-wedding.firebasestorage.app",
-  messagingSenderId: "355557621111",
-  appId:             "1:355557621111:web:d0b78c34bfe5a53b69f572"
-};
+// ============================
+// COVER
+// ============================
+function openInvitation() {
+  const cover = document.getElementById('cover');
+  const main  = document.getElementById('main');
+  cover.classList.add('hidden');
+  main.classList.add('show');
+  setTimeout(() => { cover.style.display = 'none'; }, 900);
+  tryAutoplay(); // user gesture — BGM starts here
+}
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-// ── Per-couple config (UNIQUE — never reuse a slug) ──
-const WISH_PATH     = 'shamil-janna-gs-v1/wishes';
-const IMG_PATH      = 'shamil-janna-gs/media';
-const BGM_PATH      = 'shamil-janna-gs/bgm';
-const COUPLE_FOLDER = 'digiwed-invitations/shamil-janna-gs';
-const CLOUD_NAME    = 'dormnrhdf';
-const UPLOAD_PRESET = 'ml_default';
-const ADMIN_PIN     = '2026SJ';
-const COUPLE_LABEL  = 'Janna & Shamil';
-const PDF_FILENAME  = 'Janna-Shamil-Wedding-Invitation';
-const wishRef = db.ref(WISH_PATH);
-
-// ── Landing Page ─────────────────────────────────
-const landingPage   = document.getElementById('landing-page');
-const mainInvite    = document.getElementById('main-invitation');
-const openInviteBtn = document.getElementById('openInviteBtn');
-
-openInviteBtn.addEventListener('click', () => {
-  landingPage.classList.add('hidden');
-  mainInvite.classList.add('visible');
-  window.scrollTo({ top: 0 });
-  setTimeout(() => { landingPage.style.display = 'none'; }, 900);
-  if (typeof startBgMusic === 'function') startBgMusic();
-});
-
-// ── Countdown ────────────────────────────────────
-function updateCountdown() {
-  const target = new Date('2026-08-08T12:30:00');   // wedding moment
-  const diff   = target - new Date();
-  const past   = diff <= 0;
-  const d      = Math.abs(diff);
-  document.getElementById('cd-days').textContent  = String(Math.floor(d / 86400000)).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(Math.floor((d % 86400000) / 3600000)).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(Math.floor((d % 3600000) / 60000)).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(Math.floor((d % 60000) / 1000)).padStart(2,'0');
-  const lbl = document.getElementById('cdLabel');
-  if (lbl && past && lbl.dataset.flipped !== '1') {
-    lbl.dataset.flipped = '1';
-    lbl.textContent = 'TOGETHER FOR';
+// ============================
+// COUNTDOWN  — 8 Aug 2026 12:30
+// ============================
+const TARGET = new Date('2026-08-08T12:30:00');
+function tick() {
+  const diff = TARGET - Date.now();
+  const past = diff <= 0;
+  const d = Math.abs(diff);
+  document.getElementById('cDays').textContent = String(Math.floor(d / 86400000)).padStart(2,'0');
+  document.getElementById('cHrs').textContent  = String(Math.floor((d % 86400000) / 3600000)).padStart(2,'0');
+  document.getElementById('cMins').textContent = String(Math.floor((d % 3600000) / 60000)).padStart(2,'0');
+  document.getElementById('cSecs').textContent = String(Math.floor((d % 60000) / 1000)).padStart(2,'0');
+  const head = document.getElementById('cdHeading');
+  if (head && past && head.dataset.flipped !== '1') {
+    head.dataset.flipped = '1';
+    head.textContent = 'ALHAMDULILLAH — TOGETHER FOR';
   }
 }
-updateCountdown();
-setInterval(updateCountdown, 1000);
+setInterval(tick, 1000); tick();
 
-// ── Carousel ─────────────────────────────────────
-let current = 0;
-const total = 3;
-const track = document.getElementById('carouselTrack');
-const dots  = document.querySelectorAll('.dot');
+// ============================
+// CAROUSEL
+// ============================
+let slide = 0;
+const TOTAL = 3;
+function updateCarousel() {
+  const track = document.getElementById('track');
+  if (!track) return;
+  const w = track.parentElement.offsetWidth;
+  track.style.transform = `translateX(-${slide * (w + 18)}px)`;
+  document.querySelectorAll('.cdot').forEach((d,i) => d.classList.toggle('on', i===slide));
+}
+function nextSlide() { slide = (slide+1) % TOTAL; updateCarousel(); }
+function prevSlide() { slide = (slide-1+TOTAL) % TOTAL; updateCarousel(); }
+window.addEventListener('resize', () => updateCarousel());
 
-function goTo(idx) {
-  current = (idx + total) % total;
-  track.style.transform = `translateX(-${current * 100}%)`;
-  dots.forEach((d,i) => d.classList.toggle('active', i === current));
+// ============================
+// MUSIC — embedded BGM
+// ============================
+const bgmAudio = new Audio('https://res.cloudinary.com/dormnrhdf/video/upload/digiwed-invitations/shamil-janna/bgm-v1.mp3');
+bgmAudio.loop = true;
+let playing = false;
+
+function tryAutoplay() {
+  bgmAudio.play().then(() => {
+    playing = true;
+    document.getElementById('musicBtn').classList.add('playing');
+  }).catch(() => {});
+}
+document.addEventListener('touchstart', function _t() {
+  if (!playing) tryAutoplay();
+}, {once: true});
+document.addEventListener('click', function _c() {
+  if (!playing) tryAutoplay();
+}, {once: true});
+
+function toggleMusic() {
+  if (playing) {
+    bgmAudio.pause();
+    playing = false;
+    document.getElementById('musicBtn').classList.remove('playing');
+  } else {
+    bgmAudio.play();
+    playing = true;
+    document.getElementById('musicBtn').classList.add('playing');
+  }
 }
 
-document.getElementById('prevBtn').onclick = () => goTo(current - 1);
-document.getElementById('nextBtn').onclick = () => goTo(current + 1);
-dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
-setInterval(() => goTo(current + 1), 4000);
+// ============================
+// FIREBASE WISHES
+// ============================
+firebase.initializeApp({
+  apiKey:      "AIzaSyB41fvxvl1KeHOro6WKJ72o22izuCpJ-b4",
+  authDomain:  "yaseen-jumana-wedding.firebaseapp.com",
+  databaseURL: "https://yaseen-jumana-wedding-default-rtdb.firebaseio.com",
+  projectId:   "yaseen-jumana-wedding",
+  storageBucket: "yaseen-jumana-wedding.firebasestorage.app",
+  messagingSenderId: "355557621111",
+  appId: "1:355557621111:web:d0b78c34bfe5a53b69f572"
+});
 
-// ── Scroll Reveal ─────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ══════════════════════════════════════════════════
-//  WISHES  (XSS-safe render: all guest text via textContent)
-// ══════════════════════════════════════════════════
+const db = firebase.database();
+const wishRef = db.ref('/shamil-janna/wishes');
 let allWishes = [];
 let shown = 6;
 
 wishRef.on('value', snap => {
   allWishes = [];
   snap.forEach(c => { allWishes.unshift({ ...c.val(), k: c.key }); });
-  renderWishes();
+  render();
   checkMyReplies();
 });
 
-function renderWishes() {
-  const el = document.getElementById('wishesGrid');
+function render() {
+  const el = document.getElementById('wishesList');
   el.innerHTML = '';
-  const cw = document.getElementById('wishCountWrap');
   document.getElementById('wishCount').textContent = allWishes.length;
-  cw.style.display = allWishes.length ? '' : 'none';
+  document.getElementById('wishCountWrap').style.display = allWishes.length ? '' : 'none';
   if (!allWishes.length) {
     const empty = document.createElement('div');
     empty.className = 'wish-empty';
@@ -1497,27 +1039,31 @@ function renderWishes() {
     return;
   }
   allWishes.slice(0, shown).forEach(w => {
-    const card = document.createElement('div'); card.className = 'wish-card'; card.dataset.key = w.k;
-    const who = document.createElement('div'); who.className = 'wish-card-name';
-    who.textContent = String(w.name || '').toUpperCase();
-    const msg = document.createElement('div'); msg.className = 'wish-card-msg';
-    msg.textContent = '"' + String(w.message || '') + '"';
-    const heart = document.createElement('button'); heart.type = 'button'; heart.className = 'wish-heart';
-    const n = w.likes || 0; heart.textContent = '♥' + (n ? ' ' + n : '');
+    const card = document.createElement('div'); card.className = 'wish-card';
+    card.dataset.key = w.k;
+    const who = document.createElement('div'); who.className = 'wish-who';
+    who.textContent = String(w.name);
+    const msg = document.createElement('div'); msg.className = 'wish-msg';
+    msg.textContent = `"${String(w.message)}"`;
+    const heart = document.createElement('button'); heart.className = 'wish-heart';
+    heart.type = 'button';
+    const n = w.likes || 0;
+    heart.textContent = '♥' + (n ? ' ' + n : '');
     if (localStorage.getItem('liked_' + w.k)) heart.classList.add('liked');
     heart.onclick = () => likeWish(w.k, heart);
     card.append(who, msg, heart);
     if (w.reply && w.reply.msg) {
       const rep = document.createElement('div'); rep.className = 'wish-reply';
       const rwho = document.createElement('div'); rwho.className = 'wish-reply-who';
-      rwho.textContent = '↳ ' + COUPLE_LABEL;
+      rwho.textContent = '↳ Janna & Shamil';
       const rmsg = document.createElement('div'); rmsg.className = 'wish-reply-msg';
       rmsg.textContent = String(w.reply.msg);
       rep.append(rwho, rmsg);
       card.appendChild(rep);
     }
     if (adminMode) {
-      const rbtn = document.createElement('button'); rbtn.type = 'button'; rbtn.className = 'wish-admin-btn';
+      const rbtn = document.createElement('button'); rbtn.className = 'wish-admin-btn';
+      rbtn.type = 'button';
       rbtn.textContent = (w.reply && w.reply.msg) ? 'EDIT REPLY' : 'REPLY';
       rbtn.onclick = () => openReplyEditor(w, card);
       card.appendChild(rbtn);
@@ -1530,16 +1076,17 @@ function renderWishes() {
 function likeWish(key, btn) {
   if (localStorage.getItem('liked_' + key)) return;
   localStorage.setItem('liked_' + key, '1');
-  db.ref(WISH_PATH + '/' + key + '/likes').transaction(n => (n || 0) + 1);
+  db.ref('/shamil-janna/wishes/' + key + '/likes').transaction(n => (n || 0) + 1);
   btn.classList.add('liked');
 }
-function loadMore() { shown += 6; renderWishes(); }
+
+function loadMore() { shown += 6; render(); }
 
 let toastTimer = null;
 function toast(msg, isErr, ms) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.background = isErr ? 'rgba(140,30,30,.96)' : 'rgba(26,21,16,.96)';
+  t.style.background = isErr ? 'rgba(140,30,30,.95)' : 'rgba(20,18,12,.95)';
   t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(80px)'; }, ms || 3000);
@@ -1562,17 +1109,13 @@ function sendWish() {
   });
 }
 
-// ══════════════════════════════════════════════════
-//  ADMIN MODE  (PIN-gated: photo + BGM upload + wish replies)
-// ══════════════════════════════════════════════════
-let adminMode = sessionStorage.getItem('sj_admin') === '1';
+// ============================
+// ADMIN MODE — wish replies (PIN-gated)
+// ============================
+const ADMIN_PIN = '2026JS';
+let adminMode = sessionStorage.getItem('swj_admin') === '1';
+if (adminMode) document.getElementById('adminBar').style.display = 'block';
 
-function applyAdminUI(skipRender) {
-  document.body.classList.toggle('admin-on', adminMode);
-  document.getElementById('adminBar').style.display = adminMode ? 'block' : 'none';
-  refreshSlotButtons();
-  if (!skipRender) renderWishes();
-}
 function openPin() {
   document.getElementById('pinModal').style.display = 'flex';
   setTimeout(() => document.getElementById('pinInput').focus(), 50);
@@ -1584,20 +1127,23 @@ function closePin() {
 function checkPin() {
   if (document.getElementById('pinInput').value.trim().toUpperCase() === ADMIN_PIN) {
     adminMode = true;
-    sessionStorage.setItem('sj_admin', '1');
+    sessionStorage.setItem('swj_admin', '1');
     closePin();
-    applyAdminUI();
-    toast('Admin mode on — upload photos / BGM and reply to wishes.');
+    document.getElementById('adminBar').style.display = 'block';
+    render();
+    toast('Admin mode on — reply buttons are on each wish.');
   } else {
     toast('Wrong PIN.', true);
   }
 }
 function exitAdmin() {
   adminMode = false;
-  sessionStorage.removeItem('sj_admin');
-  applyAdminUI();
+  sessionStorage.removeItem('swj_admin');
+  document.getElementById('adminBar').style.display = 'none';
+  render();
 }
 document.getElementById('pinInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+
 if (new URLSearchParams(location.search).has('admin')) openPin();
 
 function openReplyEditor(w, card) {
@@ -1607,7 +1153,8 @@ function openReplyEditor(w, card) {
   const ta = document.createElement('textarea');
   ta.placeholder = 'Write a reply to ' + String(w.name) + '...';
   if (w.reply && w.reply.msg) ta.value = w.reply.msg;
-  const save = document.createElement('button'); save.type = 'button'; save.className = 'wish-admin-btn'; save.textContent = 'SAVE REPLY';
+  const save = document.createElement('button'); save.className = 'wish-admin-btn';
+  save.type = 'button'; save.textContent = 'SAVE REPLY';
   save.onclick = () => {
     const txt = ta.value.trim();
     if (!txt) { toast('Reply is empty.', true); return; }
@@ -1620,7 +1167,8 @@ function openReplyEditor(w, card) {
   };
   ed.append(ta, save);
   if (w.reply && w.reply.msg) {
-    const del = document.createElement('button'); del.type = 'button'; del.className = 'wish-admin-btn'; del.textContent = 'REMOVE';
+    const del = document.createElement('button'); del.className = 'wish-admin-btn';
+    del.type = 'button'; del.textContent = 'REMOVE';
     del.onclick = () => {
       wishRef.child(w.k).child('reply').remove(err => {
         if (err) { toast('Could not remove — try again.', true); return; }
@@ -1632,14 +1180,16 @@ function openReplyEditor(w, card) {
   card.appendChild(ed);
 }
 
-// ── Same-device reply alert (own wish keys in localStorage) ──
+// ============================
+// SAME-DEVICE REPLY ALERT
+// ============================
 function myWishKeys() {
-  try { return JSON.parse(localStorage.getItem('sj_my_wishes') || '[]'); }
+  try { return JSON.parse(localStorage.getItem('swj_my_wishes') || '[]'); }
   catch (e) { return []; }
 }
 function rememberMyWish(key) {
   const keys = myWishKeys(); keys.push(key);
-  localStorage.setItem('sj_my_wishes', JSON.stringify(keys.slice(-20)));
+  localStorage.setItem('swj_my_wishes', JSON.stringify(keys.slice(-20)));
 }
 function checkMyReplies() {
   if (document.hidden) return;
@@ -1651,278 +1201,12 @@ function checkMyReplies() {
     const seenKey = 'seen_reply_' + w.k + '_' + (w.reply.ts || 0);
     if (localStorage.getItem(seenKey)) return;
     localStorage.setItem(seenKey, '1');
-    toast(COUPLE_LABEL + ' replied to your wish 🤍', false, 6000);
+    toast('Janna & Shamil replied to your wish 🤍', false, 6000);
     const rep = document.querySelector('.wish-card[data-key="' + w.k + '"] .wish-reply');
     if (rep) rep.classList.add('reply-new');
   });
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkMyReplies(); });
-
-// ══════════════════════════════════════════════════
-//  CLOUDINARY PHOTO UPLOAD (admin) + load saved media
-// ══════════════════════════════════════════════════
-function cloudImg(url, w) {
-  if (!url || url.indexOf('/upload/') < 0) return url;
-  return url.replace('/upload/', '/upload/f_auto,q_auto,w_' + w + '/');
-}
-function uploadToCloudinary(file) {
-  return new Promise((resolve, reject) => {
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('upload_preset', UPLOAD_PRESET);
-    fd.append('folder', COUPLE_FOLDER);
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload');
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        try { const d = JSON.parse(xhr.responseText); if (d.secure_url) resolve({ url: d.secure_url, public_id: d.public_id }); else reject(new Error('No URL')); }
-        catch (e) { reject(e); }
-      } else reject(new Error('Status ' + xhr.status));
-    };
-    xhr.onerror = () => reject(new Error('Network error'));
-    xhr.send(fd);
-  });
-}
-function applyImage(slotKey, val) {
-  if (!val || !val.url) return;
-  if (slotKey === 'hero_photo') {
-    const img = document.getElementById('heroImg');
-    if (!img) return;
-    img.src = cloudImg(val.url, 1600);
-    img.style.display = 'block';
-    return;
-  }
-  const slot = document.querySelector('[data-slot="' + slotKey + '"]');
-  if (!slot) return;
-  const img = slot.querySelector('img.slot-img');
-  const ph  = slot.querySelector('.gallery-ph');
-  if (img) { img.src = cloudImg(val.url, 900); img.style.display = 'block'; }
-  if (ph)  { ph.style.display = 'none'; }
-}
-function refreshSlotButtons() {
-  document.querySelectorAll('[data-slot]').forEach(slot => {
-    const del = slot.querySelector('.img-delete-btn');
-    if (!del) return;
-    let filled = false;
-    if (slot.getAttribute('data-slot') === 'hero_photo') {
-      const i = document.getElementById('heroImg');
-      filled = !!(i && i.getAttribute('src') && i.style.display !== 'none');
-    } else {
-      const i = slot.querySelector('img.slot-img');
-      filled = !!(i && i.getAttribute('src') && i.style.display !== 'none');
-    }
-    del.style.display = (adminMode && filled) ? 'flex' : 'none';
-  });
-}
-function pickImage(slotKey) {
-  if (!adminMode) { toast('Enter ADMIN mode first.', true); return; }
-  const inp = document.createElement('input');
-  inp.type = 'file'; inp.accept = 'image/*';
-  inp.onchange = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    toast('Uploading photo…');
-    uploadToCloudinary(file).then(res => {
-      const data = { url: res.url, public_id: res.public_id };
-      if (db) db.ref(IMG_PATH + '/' + slotKey).set(data);
-      applyImage(slotKey, data);
-      refreshSlotButtons();
-      toast('Photo updated 🤍');
-    }).catch(err => { console.error(err); toast('Upload failed — try again.', true); });
-  };
-  inp.click();
-}
-function deleteSlotImage(slotKey, btn) {
-  if (!adminMode) return;
-  if (db) db.ref(IMG_PATH + '/' + slotKey).remove();
-  if (slotKey === 'hero_photo') {
-    const img = document.getElementById('heroImg');
-    if (img) { img.removeAttribute('src'); img.style.display = 'none'; }
-  } else {
-    const slot = document.querySelector('[data-slot="' + slotKey + '"]');
-    if (slot) {
-      const img = slot.querySelector('img.slot-img');
-      if (img) { img.removeAttribute('src'); img.style.display = 'none'; }
-      const ph = slot.querySelector('.gallery-ph');
-      if (ph) ph.style.display = 'flex';
-    }
-  }
-  if (btn) btn.style.display = 'none';
-  toast('Photo removed.');
-}
-function startImageListener() {
-  if (!db) return;
-  db.ref(IMG_PATH).on('value', snap => {
-    if (!snap.exists()) return;
-    snap.forEach(c => { const v = c.val(); if (v && v.url) applyImage(c.key, v); });
-    refreshSlotButtons();
-  });
-}
-
-// ══════════════════════════════════════════════════
-//  BGM  (Cloudinary-streamed — never base64; admin upload)
-// ══════════════════════════════════════════════════
-function applyBgmUrl(url) {
-  const a = document.getElementById('bgMusic');
-  if (!a || !url) return;
-  a.src = url; a.load();
-}
-function loadBgmFromFirebase() {
-  if (!db) return;
-  db.ref(BGM_PATH).once('value', snap => {
-    if (snap.exists() && snap.val() && snap.val().url) applyBgmUrl(snap.val().url);
-  });
-}
-function cloudinaryErr(t) {
-  try { const d = JSON.parse(t); if (d && d.error && d.error.message) return d.error.message; } catch (e) {}
-  return '';
-}
-function onBgmFileSelected(input) {
-  const file = input.files[0]; input.value = '';
-  if (!file) return;
-  const overlay = document.getElementById('bgmProgOverlay');
-  const fill    = document.getElementById('bgmProgFill');
-  const label   = document.getElementById('bgmProgLabel');
-  overlay.classList.add('show'); fill.style.width = '0%'; fill.style.background = ''; label.textContent = 'UPLOADING BGM…';
-  const xhr = new XMLHttpRequest();
-  const fd  = new FormData();
-  fd.append('file', file); fd.append('upload_preset', UPLOAD_PRESET); fd.append('folder', COUPLE_FOLDER);
-  // /auto/upload routes audio through Cloudinary's video pipeline (robust for unsigned audio)
-  xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/auto/upload');
-  xhr.upload.onprogress = e => { if (e.lengthComputable && fill) fill.style.width = Math.round(e.loaded / e.total * 100) + '%'; };
-  xhr.onload = () => {
-    if (xhr.status === 200) {
-      try {
-        const d = JSON.parse(xhr.responseText);
-        if (d.secure_url) {
-          fill.style.width = '100%'; label.textContent = 'BGM READY ✦';
-          setTimeout(() => overlay.classList.remove('show'), 2000);
-          if (db) db.ref(BGM_PATH).set({ url: d.secure_url, public_id: d.public_id });
-          applyBgmUrl(d.secure_url);
-          toast('BGM uploaded 🤍');
-          if (typeof startBgMusic === 'function') startBgMusic();
-        } else { bgmErr(fill, label, overlay, xhr.status, cloudinaryErr(xhr.responseText)); }
-      } catch (e) { bgmErr(fill, label, overlay, xhr.status); }
-    } else { bgmErr(fill, label, overlay, xhr.status, cloudinaryErr(xhr.responseText)); }
-  };
-  xhr.onerror = () => bgmErr(fill, label, overlay);
-  xhr.send(fd);
-}
-function bgmErr(fill, label, overlay, status, msg) {
-  console.error('BGM upload failed', status || '', msg || '');
-  if (fill) { fill.style.width = '100%'; fill.style.background = '#c0392b'; }
-  if (label) label.textContent = 'FAILED' + (status ? ' (' + status + ')' : '') + ' — TAP TO RETRY';
-  setTimeout(() => { if (overlay) overlay.classList.remove('show'); }, 4000);
-  toast('BGM upload failed' + (msg ? ': ' + msg : ''), true);
-}
-
-// ══════════════════════════════════════════════════
-//  DOWNLOAD PDF  (html2canvas → jsPDF, print fallback)
-// ══════════════════════════════════════════════════
-async function downloadInvitePDF() {
-  const btn = document.getElementById('pdfDownloadBtn');
-  if (!window.html2canvas || !(window.jspdf && window.jspdf.jsPDF)) {
-    if (typeof toast === 'function') toast('Opening print — choose "Save as PDF".');
-    window.print();
-    return;
-  }
-  if (btn) { btn.disabled = true; btn.style.opacity = '.3'; }
-  if (typeof toast === 'function') toast('Preparing your invitation PDF…');
-  document.body.classList.add('pdf-capturing');
-  try {
-    if (document.fonts && document.fonts.ready) await document.fonts.ready;
-    await new Promise(r => setTimeout(r, 350));
-    const canvas = await html2canvas(document.body, {
-      scale: Math.min(2, window.devicePixelRatio || 1.5),
-      useCORS: true,
-      backgroundColor: getComputedStyle(document.body).backgroundColor || '#ffffff',
-      windowWidth:  document.documentElement.scrollWidth,
-      windowHeight: document.documentElement.scrollHeight,
-      scrollX: 0, scrollY: 0
-    });
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pw = pdf.internal.pageSize.getWidth();
-    const ph = pdf.internal.pageSize.getHeight();
-    const imgW = pw;
-    const imgH = canvas.height * imgW / canvas.width;
-    const img  = canvas.toDataURL('image/jpeg', 0.92);
-    let position = 0, heightLeft = imgH;
-    pdf.addImage(img, 'JPEG', 0, position, imgW, imgH);
-    heightLeft -= ph;
-    while (heightLeft > 0) {
-      position -= ph;
-      pdf.addPage();
-      pdf.addImage(img, 'JPEG', 0, position, imgW, imgH);
-      heightLeft -= ph;
-    }
-    pdf.save((typeof PDF_FILENAME !== 'undefined' ? PDF_FILENAME : 'Wedding-Invitation') + '.pdf');
-    if (typeof toast === 'function') toast('Invitation saved 🤍');
-  } catch (e) {
-    if (typeof toast === 'function') toast('Could not build the PDF — opening print instead.', true);
-    window.print();
-  } finally {
-    document.body.classList.remove('pdf-capturing');
-    if (btn) { btn.disabled = false; btn.style.opacity = '.55'; }
-  }
-}
-
-// ── Init ─────────────────────────────────────────
-applyAdminUI(true);   // set admin state without wiping the wishes shimmer
-startImageListener();
-loadBgmFromFirebase();
-</script>
-
-
-<!-- Background Music — streamed from Cloudinary (never base64); src set by JS from Firebase, uploaded via ADMIN -->
-<audio id="bgMusic" loop preload="auto"></audio>
-
-<button id="musicToggle" class="no-pdf" title="Toggle Music" style="position:fixed;bottom:24px;right:20px;z-index:9999;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.4);background:transparent;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(0,0,0,0.15);cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;-webkit-appearance:none;appearance:none;outline:none;">
-<svg id="musicIconOn" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-  <path d="M9 18V6l12-3v12" stroke="#b8860b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="6" cy="18" r="3" stroke="#b8860b" stroke-width="2"/>
-  <circle cx="18" cy="15" r="3" stroke="#b8860b" stroke-width="2"/>
-</svg>
-<svg id="musicIconOff" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
-  <path d="M9 18V6l12-3v12" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="6" cy="18" r="3" stroke="#999" stroke-width="2"/>
-  <circle cx="18" cy="15" r="3" stroke="#999" stroke-width="2"/>
-  <line x1="3" y1="3" x2="21" y2="21" stroke="#999" stroke-width="2" stroke-linecap="round"/>
-</svg>
-</button>
-
-<script>
-(function() {
-  var music = document.getElementById("bgMusic");
-  var btn = document.getElementById("musicToggle");
-  var playing = false;
-
-  var iconOn  = document.getElementById("musicIconOn");
-  var iconOff = document.getElementById("musicIconOff");
-  function showOn()  { iconOn.style.display="block"; iconOff.style.display="none"; }
-  function showOff() { iconOn.style.display="none";  iconOff.style.display="block"; }
-
-  window.startBgMusic = function() {
-    music.volume = 0.6;
-    music.play().then(function() {
-      playing = true;
-      btn.style.display = "flex";
-      showOn();
-    }).catch(function() {});
-  };
-
-  btn.addEventListener("click", function() {
-    if (playing) {
-      music.pause();
-      playing = false;
-      showOff();
-    } else {
-      music.play();
-      playing = true;
-      showOn();
-    }
-  });
-})();
 </script>
 </body>
 </html>
