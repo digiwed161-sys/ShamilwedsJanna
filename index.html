@@ -695,10 +695,23 @@ textarea.w-input { height: 96px; resize: none; }
   font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 2px;
   padding: 4px 10px; border-radius: 4px; margin-left: 10px; cursor: pointer;
 }
-#pinModal {
+#pinModal, #bgmModal {
   position: fixed; inset: 0; z-index: 2600; display: none;
   background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
 }
+.bgm-file-btn {
+  display: block; cursor: pointer;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 12px; border-radius: 8px; margin-bottom: 14px;
+}
+.bgm-or {
+  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(236,236,236,0.45); margin-bottom: 12px;
+}
+#bgmModal .pin-box input { text-align: left; letter-spacing: 0.5px; font-size: 12px; }
 .pin-box {
   background: var(--dark); border: 1px solid rgba(150,150,150,0.35);
   border-radius: 14px; padding: 28px 24px; width: 280px; max-width: 86vw;
@@ -994,7 +1007,24 @@ footer {
   font-family:'Montserrat',sans-serif;font-size:13px;letter-spacing:.5px;z-index:3000;
   opacity:0;transition:all .35s ease;pointer-events:none;max-width:86vw;text-align:center;"></div>
 
-<div id="adminBar">ADMIN MODE — REPLY TO WISHES BELOW<button onclick="exitAdmin()">EXIT</button></div>
+<div id="adminBar">ADMIN MODE<button onclick="openBgmAdmin()">🎵 BGM</button><button onclick="exitAdmin()">EXIT</button></div>
+
+<div id="bgmModal">
+  <div class="pin-box">
+    <div class="pin-title">BACKGROUND MUSIC</div>
+    <label class="bgm-file-btn">
+      UPLOAD AUDIO FILE
+      <input type="file" accept="audio/*" onchange="uploadBgm(this)" style="display:none">
+    </label>
+    <div class="bgm-or">— or paste a music link —</div>
+    <input id="bgmUrlInput" type="text" placeholder="https://…/song.mp3" autocomplete="off">
+    <div>
+      <button class="wish-admin-btn" onclick="saveBgmUrl()">SAVE</button>
+      <button class="wish-admin-btn" onclick="resetBgm()">DEFAULT</button>
+      <button class="wish-admin-btn" onclick="closeBgmAdmin()" style="margin-right:0">CLOSE</button>
+    </div>
+  </div>
+</div>
 
 <div id="pinModal">
   <div class="pin-box">
@@ -1022,9 +1052,11 @@ function openInvitation() {
 }
 
 // ============================
-// MUSIC — embedded BGM
+// MUSIC — embedded BGM (admin-updatable via Firebase)
 // ============================
-const bgmAudio = new Audio('https://res.cloudinary.com/dormnrhdf/video/upload/digiwed-invitations/shamil-janna/bgm-v1.mp3');
+const DEFAULT_BGM = 'https://res.cloudinary.com/dormnrhdf/video/upload/digiwed-invitations/shamil-janna/bgm-v1.mp3';
+let bgmUrl = DEFAULT_BGM;
+const bgmAudio = new Audio(bgmUrl);
 bgmAudio.loop = true;
 let playing = false;
 function tryAutoplay() {
@@ -1096,9 +1128,66 @@ firebase.initializeApp({
 
 const db = firebase.database();
 const WISH_PATH = '/shamil-janna-groom/wishes';
+const BGM_PATH  = '/shamil-janna-groom/bgm';
+const CLOUD_NAME = 'dormnrhdf';
+const UPLOAD_PRESET = 'ml_default';
 const wishRef = db.ref(WISH_PATH);
 let allWishes = [];
 let shown = 6;
+
+// ── BGM: live-synced from Firebase (admin can change it) ──
+db.ref(BGM_PATH).on('value', snap => {
+  const v = snap.val();
+  const url = (v && typeof v === 'object') ? v.url : v;
+  const next = url || DEFAULT_BGM;
+  if (next === bgmUrl) return;
+  bgmUrl = next;
+  const wasPlaying = playing;
+  bgmAudio.src = bgmUrl;
+  if (wasPlaying) bgmAudio.play().catch(() => {});
+});
+
+function openBgmAdmin() {
+  document.getElementById('bgmModal').style.display = 'flex';
+  document.getElementById('bgmUrlInput').value = (bgmUrl === DEFAULT_BGM) ? '' : bgmUrl;
+}
+function closeBgmAdmin() { document.getElementById('bgmModal').style.display = 'none'; }
+function saveBgmUrl() {
+  const url = document.getElementById('bgmUrlInput').value.trim();
+  if (!url) { toast('Paste a music URL or upload a file.', true); return; }
+  db.ref(BGM_PATH).set({ url: url, ts: Date.now() }, err => {
+    if (err) { toast('Could not save — try again.', true); return; }
+    toast('Background music updated 🎵'); closeBgmAdmin();
+  });
+}
+function resetBgm() {
+  db.ref(BGM_PATH).remove(err => {
+    if (err) { toast('Could not reset — try again.', true); return; }
+    toast('Music reset to default 🎵'); closeBgmAdmin();
+  });
+}
+function uploadBgm(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  toast('Uploading music… please wait', false, 60000);
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', UPLOAD_PRESET);
+  fetch('https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/video/upload', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(d => {
+      if (d && d.secure_url) {
+        document.getElementById('bgmUrlInput').value = d.secure_url;
+        db.ref(BGM_PATH).set({ url: d.secure_url, public_id: d.public_id, ts: Date.now() }, err => {
+          if (err) { toast('Uploaded, but could not save — paste the URL and Save.', true); return; }
+          toast('Music uploaded & saved 🎵'); closeBgmAdmin();
+        });
+      } else {
+        toast('Upload failed — paste a direct URL instead.', true);
+      }
+    })
+    .catch(() => toast('Upload failed — check connection or paste a URL.', true));
+}
 
 wishRef.on('value', snap => {
   allWishes = [];
