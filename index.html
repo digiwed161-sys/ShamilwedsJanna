@@ -49,6 +49,8 @@ body {
   color: transparent;
   filter: drop-shadow(0 1px 5px rgba(255,255,255,0.18));
   animation: shimmer 4.5s linear infinite;
+  padding: 0 14px; overflow: visible;
+  max-width: 100%; word-break: break-word;
 }
 @keyframes shimmer {
   0%   { background-position: 220% center; }
@@ -92,17 +94,17 @@ body {
 .cover-groom { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-weight: 300;
-  font-size: 66px; color: white; line-height: 1;
+  font-size: clamp(40px, 13vw, 64px); color: white; line-height: 1.1;
 }
 .cover-amp { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
-  font-style: italic; font-size: 48px;
+  font-style: italic; font-size: clamp(32px, 9vw, 46px);
   color: var(--gold); margin: 4px 0;
 }
 .cover-bride { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-weight: 300;
-  font-size: 66px; color: white; line-height: 1;
+  font-size: clamp(40px, 13vw, 64px); color: white; line-height: 1.1;
   margin-bottom: 28px;
 }
 .cover-date {
@@ -183,17 +185,17 @@ body {
 .hero-groom-n { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-weight: 300;
-  font-size: 62px; color: white; line-height: 1;
+  font-size: clamp(38px, 12vw, 60px); color: white; line-height: 1.1;
 }
 .hero-amp-n { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
-  font-style: italic; font-size: 40px;
+  font-style: italic; font-size: clamp(28px, 8vw, 40px);
   color: var(--gold); margin: 4px 0;
 }
 .hero-bride-n { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-weight: 300;
-  font-size: 62px; color: white; line-height: 1;
+  font-size: clamp(38px, 12vw, 60px); color: white; line-height: 1.1;
 }
 .hero-date-n {
   font-family: 'Montserrat', sans-serif;
@@ -365,6 +367,29 @@ body {
   color: var(--text); line-height: 1;
 }
 .ev-card.ev-dark .ev-date { color: white; }
+.scratch-wrap {
+  position: relative; display: inline-block;
+  padding: 6px 14px; margin-bottom: 4px;
+  border-radius: 12px;
+}
+.scratch-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: 12px; cursor: grab;
+  touch-action: none; -webkit-tap-highlight-color: transparent;
+}
+.scratch-hint {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+.scratch-wrap.revealed .scratch-canvas,
+.scratch-wrap.revealed .scratch-hint { display: none; }
 .ev-day {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 22px;
@@ -788,7 +813,11 @@ footer {
     <h2 class="events-title">The Wedding Ceremony</h2>
 
     <div class="ev-card">
-      <div class="ev-date">09.08.2026</div>
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="ev-date">09.08.2026</div>
+        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+        <div class="scratch-hint" id="scratchHint">✦ Scratch to reveal ✦</div>
+      </div>
       <div class="ev-day">Sunday</div>
       <div class="ev-hijri">SAFAR 25, 1448 AH</div>
       <div class="ev-time">5:00 PM – 9:00 PM</div>
@@ -967,6 +996,7 @@ function openInvitation() {
   cover.classList.add('hidden');
   main.classList.add('show');
   setTimeout(() => { cover.style.display = 'none'; }, 900);
+  setTimeout(initScratch, 350);
 }
 
 // ============================
@@ -1213,6 +1243,125 @@ function checkMyReplies() {
   });
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkMyReplies(); });
+
+// ============================
+// SCRATCH-TO-REVEAL DATE  + CONFETTI
+// ============================
+let scratchReady = false;
+function initScratch() {
+  const wrap = document.getElementById('scratchWrap');
+  const canvas = document.getElementById('scratchCanvas');
+  if (!wrap || !canvas) return;
+
+  // Already revealed on a previous visit — skip the coating.
+  if (localStorage.getItem('swj_date_revealed') === '1') {
+    revealScratch(false);
+    return;
+  }
+  if (scratchReady) return;
+
+  const rect = wrap.getBoundingClientRect();
+  if (rect.width < 4 || rect.height < 4) { setTimeout(initScratch, 300); return; }
+  scratchReady = true;
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = rect.width, h = rect.height;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Scratch coating
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, '#3a3a3a');
+  grad.addColorStop(0.5, '#6d6d6d');
+  grad.addColorStop(1, '#272727');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = 'destination-out';
+
+  let drawing = false, revealed = false;
+  function pos(e) {
+    const r = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  }
+  function scratch(p) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 20, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  function pct() {
+    const img = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let clear = 0;
+    for (let i = 3; i < img.length; i += 40) if (img[i] === 0) clear++;
+    return clear / (img.length / 40);
+  }
+  function check() {
+    if (revealed) return;
+    if (pct() > 0.5) { revealed = true; revealScratch(true); }
+  }
+  function down(e) { drawing = true; scratch(pos(e)); e.preventDefault(); }
+  function move(e) { if (drawing) { scratch(pos(e)); e.preventDefault(); } }
+  function up()   { if (drawing) { drawing = false; check(); } }
+
+  canvas.addEventListener('mousedown', down);
+  canvas.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', up);
+  canvas.addEventListener('touchstart', down, { passive: false });
+  canvas.addEventListener('touchmove', move, { passive: false });
+  canvas.addEventListener('touchend', up);
+}
+
+function revealScratch(celebrate) {
+  const wrap = document.getElementById('scratchWrap');
+  if (wrap) wrap.classList.add('revealed');
+  localStorage.setItem('swj_date_revealed', '1');
+  if (celebrate) fireConfetti();
+}
+
+function fireConfetti() {
+  const c = document.createElement('canvas');
+  c.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4000';
+  document.body.appendChild(c);
+  const ctx = c.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  c.width = window.innerWidth * dpr; c.height = window.innerHeight * dpr;
+  ctx.scale(dpr, dpr);
+  const W = window.innerWidth, H = window.innerHeight;
+  const colors = ['#c9a55a', '#9a9a9a', '#ffffff', '#7a7488', '#e6dcf5', '#1a1a1a'];
+  const parts = [];
+  for (let i = 0; i < 150; i++) {
+    parts.push({
+      x: W / 2 + (Math.random() - 0.5) * 140,
+      y: H * 0.35,
+      vx: (Math.random() - 0.5) * 9,
+      vy: Math.random() * -11 - 4,
+      g: 0.26 + Math.random() * 0.12,
+      s: 5 + Math.random() * 6,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.32,
+      color: colors[i % colors.length]
+    });
+  }
+  let frame = 0;
+  (function anim() {
+    frame++;
+    ctx.clearRect(0, 0, W, H);
+    let alive = false;
+    parts.forEach(p => {
+      p.vy += p.g; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      if (p.y < H + 24) alive = true;
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.max(0, 1 - frame / 190);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.6);
+      ctx.restore();
+    });
+    if (frame < 210 && alive) requestAnimationFrame(anim);
+    else c.remove();
+  })();
+}
 </script>
 </body>
 </html>
