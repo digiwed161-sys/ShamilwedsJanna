@@ -16,27 +16,27 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: 'Dancing Script', cursive;
-  background: #f5f5f4;
+  background: #f4f0fb;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 :root {
-  --dark:    #161616;
-  --dark2:   #0e0e0e;
-  --dark3:   #242424;
-  --cream:   #f5f5f4;
-  --cream2:  #e9e9e7;
-  --gold:    #9a9a9a;
-  --gold2:   #6f6f6f;
-  --gold3:   #c4c4c4;
-  --text:    #161616;
-  --muted:   #7a7a7a;
+  --dark:    #3a2d5c;
+  --dark2:   #2c2247;
+  --dark3:   #463a6b;
+  --cream:   #f4f0fb;
+  --cream2:  #e6dcf5;
+  --gold:    #c9a55a;
+  --gold2:   #b8913f;
+  --gold3:   #e8c97a;
+  --text:    #2a2140;
+  --muted:   #8a7da6;
 }
 
 /* ===== COVER ===== */
 #cover {
   position: fixed; inset: 0;
-  background: #121212;
+  background: #2c2247;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   z-index: 1000; padding: 40px 28px;
@@ -55,7 +55,7 @@ body {
 .cover-dear {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 18px;
-  color: rgba(236,236,236,0.7); margin-bottom: 6px;
+  color: rgba(237,232,246,0.7); margin-bottom: 6px;
 }
 .cover-beloved { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
@@ -81,13 +81,13 @@ body {
 .cover-date {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300; font-size: 11px;
-  letter-spacing: 5px; color: rgba(236,236,236,0.65);
+  letter-spacing: 5px; color: rgba(237,232,246,0.65);
   margin-bottom: 6px;
 }
 .cover-venue {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 16px;
-  color: rgba(236,236,236,0.55); margin-bottom: 44px;
+  color: rgba(237,232,246,0.55); margin-bottom: 44px;
 }
 .open-btn {
   width: 100%; max-width: 300px;
@@ -99,7 +99,7 @@ body {
   padding: 18px 24px; cursor: pointer;
   transition: background 0.3s;
 }
-.open-btn:active { background: rgba(150,150,150,0.12); }
+.open-btn:active { background: rgba(201,165,90,0.12); }
 
 /* ===== MAIN ===== */
 #main { display: none; }
@@ -122,7 +122,7 @@ body {
 /* ===== HERO ===== */
 .hero {
   position: relative; width: 100%;
-  min-height: 100vh; background: #121212;
+  min-height: 100vh; background: #2c2247;
   overflow: hidden;
 }
 .hero-img {
@@ -132,14 +132,14 @@ body {
 /* Placeholder styling */
 .hero-img-ph {
   width: 100%; height: 100vh;
-  background: linear-gradient(180deg, #2e2e2e 0%, #1c1c1c 50%, #0c0c0c 100%);
+  background: linear-gradient(180deg, #4a3c70 0%, #352a54 50%, #241c3c 100%);
   display: flex; align-items: center; justify-content: center;
 }
 .ph-label {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(150,150,150,0.3);
+  color: rgba(201,165,90,0.3);
 }
 .hero-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
@@ -151,7 +151,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 9px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(150,150,150,0.65); margin-bottom: 12px;
+  color: rgba(201,165,90,0.65); margin-bottom: 12px;
 }
 .hero-groom-n { font-family: 'Great Vibes', cursive !important;
   font-family: 'Dancing Script', cursive;
@@ -171,7 +171,7 @@ body {
 .hero-date-n {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300; font-size: 11px;
-  letter-spacing: 5px; color: rgba(236,236,236,0.7);
+  letter-spacing: 5px; color: rgba(237,232,246,0.7);
   margin-top: 14px;
 }
 
@@ -182,7 +182,7 @@ body {
   letter-spacing: 4px; text-transform: uppercase;
   color: var(--gold2); margin-bottom: 18px;
 }
-.dark .sec-label { color: rgba(150,150,150,0.65); }
+.dark .sec-label { color: rgba(201,165,90,0.65); }
 .divider {
   display: flex; align-items: center;
   justify-content: center; gap: 10px;
@@ -204,7 +204,7 @@ body {
 .inv-text {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 18px;
-  color: #555555; line-height: 1.7;
+  color: #6a5d85; line-height: 1.7;
 }
 .couple-formal {
   font-family: 'Dancing Script', cursive;
@@ -267,7 +267,7 @@ body {
 }
 .slide-ph-bg {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, #2e2e2e, #121212);
+  background: linear-gradient(135deg, #4a3c70, #2c2247);
   display: flex; align-items: center; justify-content: center;
 }
 .slide-ph img {
@@ -292,7 +292,7 @@ body {
 }
 .c-btn {
   width: 42px; height: 42px; border-radius: 50%;
-  border: 1px solid rgba(150,150,150,0.35);
+  border: 1px solid rgba(201,165,90,0.35);
   background: transparent; color: var(--gold);
   font-size: 17px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
@@ -300,7 +300,7 @@ body {
 .c-dots { display: flex; gap: 8px; }
 .cdot {
   height: 8px; border-radius: 4px;
-  background: rgba(150,150,150,0.3);
+  background: rgba(201,165,90,0.3);
   transition: all 0.3s; width: 8px;
 }
 .cdot.on { width: 26px; background: var(--gold); }
@@ -343,7 +343,7 @@ body {
 .ev-hijri {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
-  letter-spacing: 3px; color: rgba(150,150,150,0.7);
+  letter-spacing: 3px; color: rgba(201,165,90,0.7);
   margin-bottom: 10px;
 }
 .ev-time {
@@ -352,7 +352,7 @@ body {
   letter-spacing: 3px; color: var(--muted);
   margin-bottom: 14px;
 }
-.ev-card.ev-dark .ev-time { color: rgba(150,150,150,0.6); }
+.ev-card.ev-dark .ev-time { color: rgba(201,165,90,0.6); }
 .ev-venue {
   font-family: 'Dancing Script', cursive;
   font-size: 22px; font-weight: 500;
@@ -365,10 +365,10 @@ body {
   line-height: 1.9; color: var(--muted);
   margin-bottom: 22px;
 }
-.ev-card.ev-dark .ev-addr { color: rgba(236,236,236,0.55); }
+.ev-card.ev-dark .ev-addr { color: rgba(237,232,246,0.55); }
 .map-btn {
   display: block; width: 100%;
-  border: 1px solid rgba(150,150,150,0.35);
+  border: 1px solid rgba(201,165,90,0.35);
   background: transparent; color: var(--gold);
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
@@ -377,7 +377,7 @@ body {
   border-radius: 6px; transition: background 0.3s;
   cursor: pointer;
 }
-.map-btn:active { background: rgba(150,150,150,0.1); }
+.map-btn:active { background: rgba(201,165,90,0.1); }
 
 /* CONTACT CARD */
 .contact-card {
@@ -397,7 +397,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(236,236,236,0.5); margin-bottom: 4px;
+  color: rgba(237,232,246,0.5); margin-bottom: 4px;
 }
 .contact-num {
   font-family: 'Dancing Script', cursive;
@@ -476,7 +476,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 9px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
-  color: #8a8a8a; margin-bottom: 3px;
+  color: #9384b0; margin-bottom: 3px;
 }
 .fam-info-val {
   font-family: 'Dancing Script', cursive;
@@ -503,7 +503,7 @@ body {
 }
 .w-input {
   width: 100%; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(150,150,150,0.2);
+  border: 1px solid rgba(201,165,90,0.2);
   border-radius: 10px; padding: 15px 18px;
   color: white;
   font-family: 'Dancing Script', cursive;
@@ -511,7 +511,7 @@ body {
   outline: none; -webkit-appearance: none;
 }
 .w-input::placeholder { color: rgba(255,255,255,0.3); }
-.w-input:focus { border-color: rgba(150,150,150,0.45); }
+.w-input:focus { border-color: rgba(201,165,90,0.45); }
 textarea.w-input { height: 96px; resize: none; }
 .send-btn {
   width: 100%; background: transparent;
@@ -523,7 +523,7 @@ textarea.w-input { height: 96px; resize: none; }
   border-radius: 6px; margin-bottom: 38px;
   transition: background 0.3s;
 }
-.send-btn:active { background: rgba(150,150,150,0.1); }
+.send-btn:active { background: rgba(201,165,90,0.1); }
 .wish-card {
   background: rgba(255,255,255,0.05);
   border-radius: 12px; padding: 20px;
@@ -538,12 +538,12 @@ textarea.w-input { height: 96px; resize: none; }
 .wish-msg {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 18px;
-  color: rgba(236,236,236,0.82); line-height: 1.5;
+  color: rgba(237,232,246,0.82); line-height: 1.5;
 }
 .load-more {
   background: transparent;
-  border: 1px solid rgba(150,150,150,0.25);
-  color: rgba(150,150,150,0.6);
+  border: 1px solid rgba(201,165,90,0.25);
+  color: rgba(201,165,90,0.6);
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
@@ -554,7 +554,7 @@ textarea.w-input { height: 96px; resize: none; }
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(150,150,150,0.65); margin: -24px 0 28px;
+  color: rgba(201,165,90,0.65); margin: -24px 0 28px;
 }
 .wish-skel {
   height: 74px; border-radius: 12px; margin-bottom: 14px;
@@ -565,14 +565,14 @@ textarea.w-input { height: 96px; resize: none; }
 .wish-empty {
   font-family: 'Dancing Script', cursive;
   font-style: italic; font-size: 18px;
-  color: rgba(236,236,236,0.55); padding: 18px 0;
+  color: rgba(237,232,246,0.55); padding: 18px 0;
 }
 .wish-card { position: relative; }
 .wish-heart {
   position: absolute; top: 16px; right: 16px;
   background: transparent; border: none; cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  font-size: 13px; color: rgba(236,236,236,0.35);
+  font-size: 13px; color: rgba(237,232,246,0.35);
   letter-spacing: 1px; padding: 4px;
   transition: color 0.3s, transform 0.2s;
 }
@@ -582,7 +582,7 @@ textarea.w-input { height: 96px; resize: none; }
 .wish-reply {
   margin-top: 12px; padding: 10px 14px;
   border-left: 2px solid var(--gold);
-  background: rgba(150,150,150,0.07);
+  background: rgba(201,165,90,0.07);
   border-radius: 0 8px 8px 0; text-align: left;
 }
 .wish-reply-who {
@@ -592,13 +592,13 @@ textarea.w-input { height: 96px; resize: none; }
 }
 .wish-reply-msg {
   font-family: 'Dancing Script', cursive; font-style: italic;
-  font-size: 16px; color: rgba(236,236,236,0.85); line-height: 1.5;
+  font-size: 16px; color: rgba(237,232,246,0.85); line-height: 1.5;
 }
 .reply-new { animation: replyGlow 2.4s ease 3; }
 @keyframes replyGlow { 0%,100%{box-shadow:none} 50%{box-shadow:0 0 0 2px var(--gold)} }
 .wish-admin-btn {
   margin-top: 10px; background: transparent;
-  border: 1px solid rgba(150,150,150,0.4); color: var(--gold);
+  border: 1px solid rgba(201,165,90,0.4); color: var(--gold);
   font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
   letter-spacing: 2px; text-transform: uppercase;
   padding: 7px 14px; border-radius: 5px; cursor: pointer; margin-right: 8px;
@@ -606,14 +606,14 @@ textarea.w-input { height: 96px; resize: none; }
 .reply-editor { margin-top: 10px; }
 .reply-editor textarea {
   width: 100%; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(150,150,150,0.3); border-radius: 8px;
+  border: 1px solid rgba(201,165,90,0.3); border-radius: 8px;
   padding: 10px 12px; color: white; font-family: 'Dancing Script', cursive;
   font-size: 16px; height: 70px; resize: none; outline: none;
   margin-bottom: 8px; -webkit-appearance: none;
 }
 #adminBar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 2500; display: none;
-  background: rgba(22,22,22,0.96); color: var(--gold);
+  background: rgba(44,34,71,0.96); color: var(--gold);
   font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300;
   letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; text-align: center;
 }
@@ -627,7 +627,7 @@ textarea.w-input { height: 96px; resize: none; }
   background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
 }
 .pin-box {
-  background: var(--dark); border: 1px solid rgba(150,150,150,0.35);
+  background: var(--dark); border: 1px solid rgba(201,165,90,0.35);
   border-radius: 14px; padding: 28px 24px; width: 280px; max-width: 86vw;
   text-align: center;
 }
@@ -637,14 +637,14 @@ textarea.w-input { height: 96px; resize: none; }
 }
 .pin-box input {
   width: 100%; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(150,150,150,0.3); border-radius: 8px;
+  border: 1px solid rgba(201,165,90,0.3); border-radius: 8px;
   padding: 12px; color: white; text-align: center; letter-spacing: 4px;
   font-family: 'Montserrat', sans-serif; font-size: 14px; outline: none;
   margin-bottom: 14px; -webkit-appearance: none;
 }
 .admin-link {
   margin-top: 22px; background: transparent;
-  border: 1px solid rgba(150,150,150,0.25); color: rgba(150,150,150,0.55);
+  border: 1px solid rgba(201,165,90,0.25); color: rgba(201,165,90,0.55);
   font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
   padding: 8px 22px; border-radius: 5px; cursor: pointer;
@@ -663,15 +663,15 @@ footer {
 .footer-date {
   font-family: 'Montserrat', sans-serif;
   font-size: 11px; font-weight: 300;
-  letter-spacing: 5px; color: rgba(236,236,236,0.5);
+  letter-spacing: 5px; color: rgba(237,232,246,0.5);
   margin-bottom: 28px;
 }
-.footer-line { width: 60px; height: 1px; background: rgba(150,150,150,0.25); margin: 0 auto 24px; }
+.footer-line { width: 60px; height: 1px; background: rgba(201,165,90,0.25); margin: 0 auto 24px; }
 .footer-credit {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px; font-weight: 300;
   letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(236,236,236,0.25);
+  color: rgba(237,232,246,0.25);
 }
 .dw-socials {
   display: flex; align-items: center; justify-content: center;
@@ -680,11 +680,11 @@ footer {
 .dw-socials a {
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid rgba(150,150,150,0.3);
+  border: 1px solid rgba(201,165,90,0.3);
   transition: border-color 0.3s, background 0.3s;
 }
-.dw-socials a:active { background: rgba(150,150,150,0.12); }
-.dw-socials svg { width: 15px; height: 15px; fill: rgba(196,196,196,0.7); }
+.dw-socials a:active { background: rgba(201,165,90,0.12); }
+.dw-socials svg { width: 15px; height: 15px; fill: rgba(232,201,122,0.7); }
 </style>
 </head>
 <body>
@@ -853,7 +853,7 @@ footer {
 
   <!-- WISHES -->
   <section class="wishes-sec">
-    <div class="sec-label" style="color:rgba(150,150,150,0.65)">WISHES</div>
+    <div class="sec-label" style="color:rgba(201,165,90,0.65)">WISHES</div>
     <h2 class="wishes-title">Send Your Blessings</h2>
     <div class="wish-count" id="wishCountWrap" style="display:none">✨ <span id="wishCount">0</span> blessings received</div>
     <input type="text" class="w-input" id="wName" placeholder="Your Name" autocomplete="off">
@@ -888,7 +888,7 @@ footer {
 </div><!-- /main -->
 
 <div id="toast" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(80px);
-  background:rgba(22,22,22,.95);color:#efefef;padding:12px 22px;border-radius:30px;
+  background:rgba(44,34,71,.95);color:#f0eafa;padding:12px 22px;border-radius:30px;
   font-family:'Montserrat',sans-serif;font-size:13px;letter-spacing:.5px;z-index:3000;
   opacity:0;transition:all .35s ease;pointer-events:none;max-width:86vw;text-align:center;"></div>
 
@@ -1040,7 +1040,7 @@ let toastTimer = null;
 function toast(msg, isErr, ms) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.background = isErr ? 'rgba(140,30,30,.95)' : 'rgba(22,22,22,.95)';
+  t.style.background = isErr ? 'rgba(140,30,30,.95)' : 'rgba(44,34,71,.95)';
   t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(80px)'; }, ms || 3000);
