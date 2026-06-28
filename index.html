@@ -248,19 +248,19 @@ body {
 }
 .countdown {
   display: flex; justify-content: center;
-  align-items: stretch; gap: 10px;
+  align-items: stretch; gap: clamp(5px, 1.6vw, 10px);
 }
 .cnt-item {
   text-align: center;
   background: #161616;
   border-radius: 14px;
-  padding: 16px 8px 12px;
-  min-width: 66px;
+  padding: 14px clamp(5px, 2vw, 9px) 10px;
+  min-width: clamp(50px, 15vw, 66px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 .cnt-num {
   font-family: 'Dancing Script', cursive;
-  font-size: 44px; font-weight: 300;
+  font-size: clamp(30px, 9vw, 44px); font-weight: 300;
   color: #ffffff; line-height: 1;
   display: block;
 }
@@ -740,6 +740,53 @@ footer {
 }
 .dw-socials a:active { background: rgba(150,150,150,0.12); }
 .dw-socials svg { width: 15px; height: 15px; fill: rgba(196,196,196,0.7); }
+
+/* ===== RED CARPET ===== */
+.carpet-zone { position: relative; }
+.carpet-zone::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0;
+  left: 12%; right: 12%; z-index: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 6px),
+    linear-gradient(90deg, #5e0710 0%, #8a0e1a 14%, #ab1422 50%, #8a0e1a 86%, #5e0710 100%);
+  box-shadow:
+    inset 5px 0 0 #c9a55a, inset -5px 0 0 #c9a55a,
+    inset 11px 0 0 rgba(0,0,0,0.28), inset -11px 0 0 rgba(0,0,0,0.28),
+    0 0 22px rgba(0,0,0,0.22);
+}
+/* content sits on the carpet, within the gutters */
+.carpet-zone > section,
+.carpet-zone > footer {
+  position: relative; z-index: 1;
+  background: transparent !important;
+  padding-left: 15%; padding-right: 15%;
+}
+@media (max-width: 480px) {
+  .carpet-zone > section,
+  .carpet-zone > footer { padding-left: 16%; padding-right: 16%; }
+}
+/* lighten bare section text so it reads on red */
+.carpet-zone .inv-title,
+.carpet-zone .events-title,
+.carpet-zone .family-title,
+.carpet-zone .inv-text,
+.carpet-zone .couple-formal,
+.carpet-zone .countdown-lbl,
+.carpet-zone #cdHeading,
+.carpet-zone .quote-txt,
+.carpet-zone .regards-names {
+  color: #fbf3e6 !important;
+}
+.carpet-zone .sec-label,
+.carpet-zone .quote-src,
+.carpet-zone .fam-role,
+.carpet-zone .arabic-verse,
+.carpet-zone .div-gems {
+  color: #f0d9a8 !important;
+}
+.carpet-zone .div-line { background: #e8c97a; opacity: 0.7; }
+.carpet-zone .cnt-lbl { color: rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
@@ -782,6 +829,9 @@ footer {
       <div class="hero-date-n">0 9 &nbsp;·&nbsp; A U G U S T &nbsp;·&nbsp; 2 0 2 6</div>
     </div>
   </section>
+
+  <!-- ===== RED CARPET ZONE (after hero → footer) ===== -->
+  <div class="carpet-zone">
 
   <!-- INVITATION -->
   <section class="invitation-sec">
@@ -965,6 +1015,8 @@ footer {
     </div>
     <button class="admin-link" onclick="openPin()">ADMIN</button>
   </footer>
+
+  </div><!-- /carpet-zone -->
 
 </div><!-- /main -->
 
