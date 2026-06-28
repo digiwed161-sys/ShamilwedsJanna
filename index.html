@@ -788,6 +788,32 @@ footer {
 .events-sec::before     { top: 18px; left: -26px; transform: rotate(-28deg); }
 .quote-sec::before      { bottom: 6px; right: -24px; transform: rotate(150deg); }
 .family-sec::before     { bottom: 10px; left: -24px; transform: rotate(-160deg); }
+
+/* second sprig (opposite corner) on the light sections */
+.invitation-sec::after, .events-sec::after, .quote-sec::after, .family-sec::after {
+  content: ''; position: absolute;
+  width: 112px; height: 168px; opacity: 0.13;
+  pointer-events: none; z-index: -1;
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 180'%3E%3Cg fill='none' stroke='%238e8799' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M61 178 C 53 142 70 112 60 72 C 53 44 65 24 60 8'/%3E%3Cellipse cx='43' cy='62' rx='13' ry='6' transform='rotate(-35 43 62)'/%3E%3Cellipse cx='78' cy='50' rx='13' ry='6' transform='rotate(35 78 50)'/%3E%3Cellipse cx='41' cy='98' rx='12' ry='5.5' transform='rotate(-30 41 98)'/%3E%3Cellipse cx='80' cy='86' rx='12' ry='5.5' transform='rotate(30 80 86)'/%3E%3Cellipse cx='48' cy='132' rx='11' ry='5' transform='rotate(-28 48 132)'/%3E%3Cellipse cx='74' cy='122' rx='11' ry='5' transform='rotate(28 74 122)'/%3E%3Ccircle cx='60' cy='14' r='5'/%3E%3C/g%3E%3C/svg%3E");
+}
+.invitation-sec::after { bottom: 14px; left: -22px; transform: rotate(-200deg); }
+.events-sec::after     { bottom: 16px; right: -24px; transform: rotate(165deg); }
+.quote-sec::after      { top: 12px; left: -24px; transform: rotate(-16deg); }
+.family-sec::after     { top: 14px; right: -22px; transform: rotate(26deg); }
+
+/* florals on the dark sections (lighter stroke) */
+.wishes-sec, footer { position: relative; overflow: hidden; isolation: isolate; }
+.wishes-sec::before, .wishes-sec::after, footer::before {
+  content: ''; position: absolute;
+  width: 120px; height: 180px; opacity: 0.12;
+  pointer-events: none; z-index: -1;
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 180'%3E%3Cg fill='none' stroke='%23b8b2c2' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M61 178 C 53 142 70 112 60 72 C 53 44 65 24 60 8'/%3E%3Cellipse cx='43' cy='62' rx='13' ry='6' transform='rotate(-35 43 62)'/%3E%3Cellipse cx='78' cy='50' rx='13' ry='6' transform='rotate(35 78 50)'/%3E%3Cellipse cx='41' cy='98' rx='12' ry='5.5' transform='rotate(-30 41 98)'/%3E%3Cellipse cx='80' cy='86' rx='12' ry='5.5' transform='rotate(30 80 86)'/%3E%3Cellipse cx='48' cy='132' rx='11' ry='5' transform='rotate(-28 48 132)'/%3E%3Cellipse cx='74' cy='122' rx='11' ry='5' transform='rotate(28 74 122)'/%3E%3Ccircle cx='60' cy='14' r='5'/%3E%3C/g%3E%3C/svg%3E");
+}
+.wishes-sec::before { top: 18px; right: -24px; transform: rotate(22deg); }
+.wishes-sec::after  { bottom: 18px; left: -24px; transform: rotate(-150deg); }
+footer::before      { bottom: 6px; right: -22px; transform: rotate(150deg); }
 </style>
 </head>
 <body>
