@@ -246,26 +246,29 @@ body {
 }
 .countdown {
   display: flex; justify-content: center;
-  align-items: center; gap: 12px;
+  align-items: stretch; gap: 10px;
 }
-.cnt-item { text-align: center; }
+.cnt-item {
+  text-align: center;
+  background: #161616;
+  border-radius: 14px;
+  padding: 16px 8px 12px;
+  min-width: 66px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
 .cnt-num {
   font-family: 'Dancing Script', cursive;
-  font-size: 54px; font-weight: 300;
-  color: var(--text); line-height: 1;
+  font-size: 44px; font-weight: 300;
+  color: #ffffff; line-height: 1;
   display: block;
 }
 .cnt-lbl {
   font-family: 'Montserrat', sans-serif;
   font-size: 9px; font-weight: 300;
-  letter-spacing: 3px; color: var(--muted);
-  text-transform: uppercase; margin-top: 4px;
+  letter-spacing: 3px; color: rgba(255,255,255,0.55);
+  text-transform: uppercase; margin-top: 6px;
 }
-.cnt-dot {
-  font-family: 'Dancing Script', cursive;
-  font-size: 28px; color: var(--gold2);
-  margin-bottom: 18px;
-}
+.cnt-dot { display: none; }
 
 /* ===== GALLERY ===== */
 .gallery-sec {
