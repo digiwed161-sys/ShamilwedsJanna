@@ -1014,7 +1014,8 @@ firebase.initializeApp({
 });
 
 const db = firebase.database();
-const wishRef = db.ref('/shamil-janna/wishes');
+const WISH_PATH = '/shamil-janna-groom/wishes';
+const wishRef = db.ref(WISH_PATH);
 let allWishes = [];
 let shown = 6;
 
@@ -1076,7 +1077,7 @@ function render() {
 function likeWish(key, btn) {
   if (localStorage.getItem('liked_' + key)) return;
   localStorage.setItem('liked_' + key, '1');
-  db.ref('/shamil-janna/wishes/' + key + '/likes').transaction(n => (n || 0) + 1);
+  db.ref(WISH_PATH + '/' + key + '/likes').transaction(n => (n || 0) + 1);
   btn.classList.add('liked');
 }
 
