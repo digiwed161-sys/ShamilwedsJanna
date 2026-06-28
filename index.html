@@ -16,13 +16,10 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: 'Dancing Script', cursive;
-  background-color: #fff3f3;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.013' numOctaves='5' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' lighting-color='%23ffffff' surfaceScale='2.6' diffuseConstant='1.05' result='l'%3E%3CfeDistantLight azimuth='235' elevation='56'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.35'/%3E%3C/svg%3E");
-  background-size: 620px 620px, 140px 140px;
-  background-repeat: repeat, repeat;
-  background-blend-mode: soft-light, overlay;
+  background-color: #fdf3f6;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'500'%20height%3D'500'%3E%3Cdefs%3E%3Cfilter%20id%3D'wrinkle'%20x%3D'0%25'%20y%3D'0%25'%20width%3D'100%25'%20height%3D'100%25'%20color-interpolation-filters%3D'sRGB'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.035%200.018'%20numOctaves%3D'5'%20seed%3D'12'%20result%3D'noise'%2F%3E%3CfeDiffuseLighting%20in%3D'noise'%20lightingColor%3D'%23f5c0d0'%20surfaceScale%3D'2.5'%20result%3D'light'%3E%3CfeDistantLight%20azimuth%3D'30'%20elevation%3D'42'%2F%3E%3C%2FfeDiffuseLighting%3E%3CfeComposite%20in%3D'light'%20in2%3D'SourceGraphic'%20operator%3D'in'%20result%3D'litpaper'%2F%3E%3CfeTurbulence%20type%3D'turbulence'%20baseFrequency%3D'0.02%200.008'%20numOctaves%3D'3'%20seed%3D'5'%20result%3D'warp'%2F%3E%3CfeDisplacementMap%20in%3D'litpaper'%20in2%3D'warp'%20scale%3D'14'%20xChannelSelector%3D'R'%20yChannelSelector%3D'G'%20result%3D'warped'%2F%3E%3CfeFlood%20flood-color%3D'rgba(255%2C220%2C230%2C0.45)'%20result%3D'overlay'%2F%3E%3CfeComposite%20in%3D'overlay'%20in2%3D'warped'%20operator%3D'over'%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D'500'%20height%3D'500'%20fill%3D'%23fdf3f6'%20filter%3D'url(%23wrinkle)'%2F%3E%3C%2Fsvg%3E");
+  background-repeat: repeat;
+  background-size: 500px 500px;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
