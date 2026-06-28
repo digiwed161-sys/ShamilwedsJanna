@@ -33,6 +33,33 @@ body {
   --muted:   #7a7488;
 }
 
+/* ===== DIAMOND SHIMMER (couple names) ===== */
+.cover-groom, .cover-bride, .cover-amp,
+.hero-groom-n, .hero-amp-n, .hero-bride-n,
+.footer-names {
+  background-image: linear-gradient(110deg,
+    #ffffff 0%, #cfcfd6 14%, #ffffff 28%,
+    #e7e2f3 42%, #ffffff 50%, #bfc4d4 58%,
+    #ffffff 72%, #d6d6dc 86%, #ffffff 100%);
+  background-size: 220% auto;
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 1px 5px rgba(255,255,255,0.18));
+  animation: shimmer 4.5s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 220% center; }
+  100% { background-position: -220% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-groom, .cover-bride, .cover-amp,
+  .hero-groom-n, .hero-amp-n, .hero-bride-n,
+  .footer-names { animation: none; }
+}
+
 /* ===== COVER ===== */
 #cover {
   position: fixed; inset: 0;
